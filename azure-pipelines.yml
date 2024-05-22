@@ -1,0 +1,34 @@
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  dockerRegistryServiceConnection: '436ea96a-5eaf-4514-a121-ff5b2d0ff499'
+  imageRepository: 'antimultasbr'
+  containerRegistry: 'antimultasbrazil.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+  
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)

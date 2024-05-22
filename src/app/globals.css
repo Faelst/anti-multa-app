@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilo da barra de rolagem */
+::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+  height: 9px;
+}
+
+/* Estilo do "polegar"*/
+::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* Cor de fundo do polegar */
+  border-radius: 8px; /* Raio das bordas do polegar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: whitesmoke;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #f9f9f9;
+  scroll-behavior: smooth;
+}
