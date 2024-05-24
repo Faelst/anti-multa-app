@@ -4,7 +4,15 @@ import { useFormContext } from '@/context/formContext';
 import { cpfMask, phoneMask, vehiclePlateMask } from '@/utils';
 
 const QueryForm = () => {
-  const { setValue } = useFormContext();
+  const { setValue, isSubmitting, setIsSubmitting } = useFormContext();
+
+  const loading = () => {
+    return (
+      <div className="flex justify-center">
+        <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-2 bg-white md:dark:bg-[#15141b]">
@@ -62,8 +70,15 @@ const QueryForm = () => {
         }}
       />
       <TextFormField name="chassi" label="Chassi" placeholder="Ex: 9B1234567C8901234" required />
-      <Button fullWidth className="my-2 rounded-full" type="submit">
-        Consultar
+      <Button
+        fullWidth
+        className="my-2 rounded-full"
+        type="submit"
+        onClick={() => {
+          setIsSubmitting(true);
+        }}
+      >
+        {isSubmitting ? loading() : 'Consultar'}
       </Button>
     </div>
   );

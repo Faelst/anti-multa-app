@@ -1,4 +1,4 @@
-import { FormProvider } from '@/context/formContext';
+import { FormProvider, useFormContext } from '@/context/formContext';
 import QueryForm from './QueryForm';
 import {
   QueryFormProps,
@@ -19,12 +19,9 @@ const QueryFormContainer = () => {
   const { setInfractionsData } = useInfractions();
   const { setClient } = useClient();
   const { setOpenDialogHomeForm } = useDialogContext();
+  const { setIsSubmitting } = useFormContext();
 
   const handleSubmit = async ({ chassi, vehiclePlate, cpf, name, phone }: QueryFormProps) => {
-    setOpenDialogHomeForm(true);
-
-    return;
-
     api
       .registerClient({
         cpf,
@@ -41,16 +38,24 @@ const QueryFormContainer = () => {
       phone
     });
 
-    const { data } = await api.fetchTrafficInfractions({
-      chassi,
-      vehiclePlate
-    });
+    try {
+      const { data } = await api.fetchTrafficInfractions({
+        chassi,
+        vehiclePlate
+      });
 
-    const trafficInfractions = serializeToListInfractions(data);
+      const trafficInfractions = serializeToListInfractions(data);
 
-    await setInfractionsData(trafficInfractions);
+      await setInfractionsData(trafficInfractions);
 
-    router.push('/infracoes');
+      router.push('/infracoes');
+    } catch (error) {
+      setOpenDialogHomeForm(true);
+
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const validationSchema = validationSchemaQueryForm();

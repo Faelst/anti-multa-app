@@ -1,13 +1,15 @@
+import { Dispatch, SetStateAction, use, useEffect, useState } from 'react';
 import { Button, Typography } from '@/components';
 import { HiChevronRight } from 'react-icons/hi';
 import BoxDetails from './HeaderWrapper/BoxDetails';
+
 import { formatDocumentNumber } from '@/utils/format/formatDocumentNumber';
 import { formatCurrency } from '@/utils';
 import InfractionGuide from './HeaderWrapper/InfractionGuide';
 import DebtsSelectionGuide from './HeaderWrapper/DebtsSelectionGuide';
-import { Dispatch, SetStateAction, useState } from 'react';
 import { useInfractions } from '../../../../context/infracoesContext';
 import { useClient } from '../../../../context/clientContext';
+import { useRouter } from 'next/navigation';
 
 interface ListOfInfractionsProps {
   infractionsList: any[];
@@ -20,9 +22,14 @@ const ListOfInfractionsHeader: React.FC<ListOfInfractionsProps> = ({
 }) => {
   const { infractionsData } = useInfractions();
   const { client } = useClient();
-  const [multaMeter] = useState(
-    formatCurrency(infractionsData.reduce((acc, curr) => acc + Number(curr.valorMulta), 0))
-  );
+  const [multaMeter, setMultaMeter] = useState('R$ 0,00');
+
+  useEffect(() => {
+    if (infractionsData) {
+      const total = infractionsData.reduce((acc, curr) => acc + Number(curr.valorMulta), 0);
+      setMultaMeter(formatCurrency(total));
+    }
+  }, [infractionsData]);
 
   const handleOnClicked = () => setDetails(true);
 

@@ -1,5 +1,6 @@
 'use client';
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ClientContextType {
   client: any;
@@ -18,7 +19,7 @@ interface InfractionsProviderProps {
 }
 
 export const ClientProvider = ({ children }: InfractionsProviderProps) => {
-  const [client, setClient] = useState<any>(null);
+  const [client, setClient] = useState<any>({});
 
   return <ClientContext.Provider value={{ client, setClient }}>{children}</ClientContext.Provider>;
 };

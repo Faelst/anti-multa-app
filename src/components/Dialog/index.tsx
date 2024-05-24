@@ -15,7 +15,7 @@ export default function AlertDialog() {
   const handleClose = () => {
     setOpenDialogHomeForm(false);
 
-    window.open(' wa.me/5531987888526', '_blank');
+    window.open('https://wa.me/5531987888526', '_blank');
   };
 
   return (
