@@ -1,5 +1,6 @@
 import { Typography } from '@/components';
 import React from 'react';
+import { formatCurrency } from '../../../utils';
 
 interface InfractionData {
   infra: string;
@@ -20,13 +21,13 @@ const InfractionDetails: React.FC<InfractionData> = ({
         {infra}
       </Typography>
       <Typography variant="md" className="font-bold md:dark:text-white">
-        Valor da Multa: {valorMulta}
+        Valor da Multa: {formatCurrency(Number(valorMulta))}
       </Typography>
       <Typography variant="md" className="font-bold md:dark:text-white">
-        Recurso Simples: {recursoSimples}
+        Recurso Simples: {formatCurrency(Number(recursoSimples))}
       </Typography>
       <Typography variant="md" className="font-bold md:dark:text-white">
-        Recurso Especial: {recursoEspecial}
+        Recurso Especial: {formatCurrency(Number(recursoEspecial))}
       </Typography>
     </div>
   );

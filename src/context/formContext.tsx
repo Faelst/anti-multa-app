@@ -202,41 +202,5 @@ const ChangeFieldHandler = ({ handler, children }: ChangeFieldHandlerProps): JSX
 };
 
 export function useFormContext() {
-  const context = useContext(FormContext);
-  const {
-    readOnly,
-    onSubmit,
-    onError,
-    setValue,
-    control,
-    reset,
-    formState,
-    getValues,
-    watch,
-    validationErrors,
-    submitting,
-    isDirty,
-    isValid,
-    dirtyFields,
-    trigger,
-    register
-  } = context;
-  return {
-    readOnly,
-    onSubmit,
-    onError,
-    setValue,
-    control,
-    reset,
-    formState,
-    getValues,
-    validationErrors,
-    watch,
-    submitting,
-    isDirty,
-    isValid,
-    dirtyFields,
-    trigger,
-    register
-  };
+  return useContext(FormContext);
 }

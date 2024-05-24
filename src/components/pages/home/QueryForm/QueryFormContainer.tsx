@@ -8,53 +8,48 @@ import {
 import TermOfUse from './TermOfUse';
 import { useRouter } from 'next/navigation';
 import { useInfractions } from '@/context/infracoesContext';
+import api from '../../../../service/api';
+import { useClient } from '../../../../context/clientContext';
+import { serializeToListInfractions } from '../../../../utils';
+import { useDialogContext } from '../../../../context/dialogContext';
 
 const QueryFormContainer = () => {
   const router = useRouter();
+
   const { setInfractionsData } = useInfractions();
+  const { setClient } = useClient();
+  const { setOpenDialogHomeForm } = useDialogContext();
 
-  const mockData = [
-    {
-      infra:
-        '111-50 - Transitar na faixa ou via exclusiva regulam. p transporte publico coleti-vo de passageiros',
-      valorMulta: 'R$ 250,53',
-      recursoSimples: 114,
-      recursoEspecial: 229
-    },
-    {
-      infra:
-        '222-50 - Transitar na faixa ou via exclusiva regulam. p transporte publicon coleti-vo de passageiros',
-      valorMulta: 'R$ 550,52',
-      recursoSimples: 114,
-      recursoEspecial: 229
-    },
-    {
-      infra:
-        '333-50 - Transitar na faixa ou via exclusiva regulam. p transporte publicon coleti-vo de passageiros',
-      valorMulta: 'R$ 550,52',
-      recursoSimples: 114,
-      recursoEspecial: 229
-    },
-    {
-      infra:
-        '444-50 - Transitar na faixa ou via exclusiva regulam. p transporte publicon coleti-vo de passageiros',
-      valorMulta: 'R$ 550,52',
-      recursoSimples: 114,
-      recursoEspecial: 229
-    },
-    {
-      infra:
-        '555-50 - Transitar na faixa ou via exclusiva regulam. p transporte publicon coleti-vo de passageiros',
-      valorMulta: 'R$ 550,52',
-      recursoSimples: 114,
-      recursoEspecial: 229
-    }
-  ];
+  const handleSubmit = async ({ chassi, vehiclePlate, cpf, name, phone }: QueryFormProps) => {
+    setOpenDialogHomeForm(true);
 
-  const handleSubmit = async (value: QueryFormProps) => {
-    console.log({ value });
-    //const data = await fetchData(value);
-    await setInfractionsData(mockData);
+    return;
+
+    api
+      .registerClient({
+        cpf,
+        name,
+        phone
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    setClient({
+      cpf,
+      name,
+      phone
+    });
+
+    const { data } = await api.fetchTrafficInfractions({
+      chassi,
+      vehiclePlate
+    });
+
+    const trafficInfractions = serializeToListInfractions(data);
+
+    await setInfractionsData(trafficInfractions);
+
     router.push('/infracoes');
   };
 

@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+
 const DynamicPaymentPage = dynamic(() => import('@/components/pages/payment'), {
   ssr: true,
-  loading: () => <p>Please wait...</p>
+  loading: () => <LoadingSpinner />
 });
 
 export const metadata: Metadata = {

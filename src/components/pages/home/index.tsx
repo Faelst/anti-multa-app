@@ -1,4 +1,5 @@
 'use client';
+import AlertDialog from '../../Dialog';
 import HomeHeader from './HomeHeader';
 import QueryFormContainer from './QueryForm/QueryFormContainer';
 
@@ -8,6 +9,7 @@ const HomePage = () => {
       <div className="col-span-1 space-y-2 md:col-span-1 md:w-3/4">
         <HomeHeader />
         <QueryFormContainer />
+        <AlertDialog />
       </div>
       <div className="col-span-1 hidden text-black sm:block md:col-span-1">
         Espaço reservado para incluir um logotipo

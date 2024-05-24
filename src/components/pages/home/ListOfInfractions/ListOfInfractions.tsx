@@ -1,6 +1,6 @@
 import { Table, TableColumn } from '@/components';
 import { formatCurrency } from '@/utils';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { OpenDrawerDetails } from './ListOfInfractionsContainer';
 import { IconButton } from '@mui/material';
 import moment from 'moment';
@@ -20,21 +20,38 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
   setInfractionsList,
   setRowData
 }) => {
+  const [total] = useState(data.reduce((acc, curr) => acc + Number(curr.valorMulta), 0));
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const colorIcon = isDark ? '#FFFFFFB2' : '#00000';
-
   const columns: TableColumn[] = [
     { key: 'infra', label: 'Infração', field: 'infra', align: 'center' },
-    { key: 'valorMulta', label: 'Valor da Multa', field: 'valorMulta', align: 'center' },
     {
       key: 'dataDaInfracao',
       label: 'Data da infração',
       field: 'dataDaInfracao',
       align: 'center',
       action: (rowData) => {
-        const dateOfInfraction = moment(rowData.dataDaInfracao).format('DD/MM/YY');
-        return dateOfInfraction;
+        const formattedDate = moment(rowData.dataDaInfracao).format('DD/MM/YYYY HH:mm');
+        return (
+          <div className="flex items-center space-x-2">
+            <span>{formattedDate}</span>
+          </div>
+        );
+      }
+    },
+    {
+      key: 'valorMulta',
+      label: 'Valor da Multa',
+      field: 'valorMulta',
+      align: 'center',
+      action: (rowData) => {
+        const formattedCurrency = formatCurrency(Number(rowData.valorMulta));
+        return (
+          <div className="flex items-center space-x-2">
+            <span>{formattedCurrency}</span>
+          </div>
+        );
       }
     },
     {
@@ -43,7 +60,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       field: 'recursoSimples',
       align: 'center',
       action: (rowData) => {
-        const formattedCurrency = formatCurrency(9999 / 100);
+        const formattedCurrency = formatCurrency(Number(rowData.recursoSimples));
         return (
           <div className="flex items-center space-x-2">
             <span>{formattedCurrency}</span>
@@ -57,7 +74,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       field: 'recursoEspecial',
       align: 'center',
       action: (rowData) => {
-        const formattedCurrency = formatCurrency(78989 / 100);
+        const formattedCurrency = formatCurrency(Number(rowData.recursoEspecial));
         return (
           <div className="flex items-center space-x-2">
             <span>{formattedCurrency}</span>
@@ -92,7 +109,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
     <Table
       columns={columns}
       rows={data}
-      totalValue={formatCurrency(52584)}
+      totalValue={formatCurrency(total)}
       checkboxSelection
       onSelectionChange={handleOnSelectionChange}
       onSelectedRow={(selectedRow) => setRowData(selectedRow)}

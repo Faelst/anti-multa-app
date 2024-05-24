@@ -1,7 +1,9 @@
 import dynamic from 'next/dynamic';
 
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+
 const DynamicHomePage = dynamic(() => import('@/components/pages/home'), {
-  loading: () => <p>Please wait...</p>
+  loading: () => <LoadingSpinner />
 });
 
 export default function Home() {

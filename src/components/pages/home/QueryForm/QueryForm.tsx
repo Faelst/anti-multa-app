@@ -1,13 +1,52 @@
 import { Button } from '@/components';
 import { MaskedInput, TextFormField } from '@/components/FormField';
 import { useFormContext } from '@/context/formContext';
-import { vehiclePlateMask } from '@/utils';
+import { cpfMask, phoneMask, vehiclePlateMask } from '@/utils';
 
 const QueryForm = () => {
   const { setValue } = useFormContext();
 
   return (
     <div className="space-y-2 bg-white md:dark:bg-[#15141b]">
+      <TextFormField
+        name="name"
+        label="Nome do solicitante"
+        placeholder="Ex: João da Silva"
+        required
+        InputProps={{ inputProps: { maxLength: 100 } }}
+        onChange={({ target }) => {
+          const value = target?.value?.toUpperCase() ?? '';
+          setValue('name', value);
+        }}
+      />
+      <TextFormField
+        name="cpf"
+        label="CPF do solicitante"
+        placeholder="Ex: 000.000.000-00"
+        required
+        InputProps={{
+          inputComponent: MaskedInput,
+          inputProps: { mask: cpfMask }
+        }}
+        onChange={({ target }) => {
+          const value = target?.value ?? '';
+          setValue('cpf', value);
+        }}
+      />
+      <TextFormField
+        name="phone"
+        label="Telefone do solicitante"
+        placeholder="Ex: (00) 00000-0000"
+        required
+        InputProps={{
+          inputComponent: MaskedInput,
+          inputProps: { mask: phoneMask }
+        }}
+        onChange={({ target }) => {
+          const value = target?.value ?? '';
+          setValue('phone', value);
+        }}
+      />
       <TextFormField
         name="vehiclePlate"
         label="Placa do veículo"

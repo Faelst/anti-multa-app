@@ -18,7 +18,7 @@ interface FineSummaryProps {
 
 const calculateTotalFine = (infractionsList: InfractionData[]) => {
   return infractionsList.reduce((total, { valorMulta }) => {
-    const value = parseFloat(valorMulta.replace('R$ ', '').replace(',', '.'));
+    const value = parseFloat(String(valorMulta).replace('R$ ', '').replace(',', '.'));
     return total + value;
   }, 0);
 };

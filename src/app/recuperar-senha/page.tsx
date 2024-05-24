@@ -1,8 +1,11 @@
 import dynamic from 'next/dynamic';
+
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+
 const DynamicRecoverPasswordLayout = dynamic(
   () => import('@/components/pages/Login/RecoverPassword'),
   {
-    loading: () => <p>Please wait...</p>
+    loading: () => <LoadingSpinner />
   }
 );
 

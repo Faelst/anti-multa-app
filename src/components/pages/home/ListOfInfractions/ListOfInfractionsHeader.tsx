@@ -5,7 +5,9 @@ import { formatDocumentNumber } from '@/utils/format/formatDocumentNumber';
 import { formatCurrency } from '@/utils';
 import InfractionGuide from './HeaderWrapper/InfractionGuide';
 import DebtsSelectionGuide from './HeaderWrapper/DebtsSelectionGuide';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { useInfractions } from '../../../../context/infracoesContext';
+import { useClient } from '../../../../context/clientContext';
 
 interface ListOfInfractionsProps {
   infractionsList: any[];
@@ -16,10 +18,11 @@ const ListOfInfractionsHeader: React.FC<ListOfInfractionsProps> = ({
   infractionsList,
   setDetails
 }) => {
-  const name = 'Caio silva';
-  const registrationNumber = formatDocumentNumber('46320340029');
-  const detran = 'Detran- MG';
-  const multaMeter = formatCurrency(1560);
+  const { infractionsData } = useInfractions();
+  const { client } = useClient();
+  const [multaMeter] = useState(
+    formatCurrency(infractionsData.reduce((acc, curr) => acc + Number(curr.valorMulta), 0))
+  );
 
   const handleOnClicked = () => setDetails(true);
 
@@ -27,9 +30,9 @@ const ListOfInfractionsHeader: React.FC<ListOfInfractionsProps> = ({
     <>
       <div className="flex flex-col gap-4 divide-x divide-gray-300 md:dark:divide-gray-700 md:dark:bg-[#15141b] md:dark:shadow lg:flex-row">
         <BoxDetails
-          name={name}
-          registrationNumber={registrationNumber}
-          detran={detran}
+          name={client.name}
+          registrationNumber={formatDocumentNumber(client.cpf)}
+          detran={'Detran MG'}
           multaMeter={multaMeter}
         />
         <InfractionGuide />

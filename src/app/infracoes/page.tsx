@@ -1,12 +1,15 @@
+import { CircularProgress } from '@mui/material';
 import dynamic from 'next/dynamic';
+
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 const DynamicListPage = dynamic(
   () => import('@/components/pages/home/ListOfInfractions/ListOfInfractionsContainer'),
   {
-    loading: () => <p>Please wait...</p>
+    loading: () => <LoadingSpinner />
   }
 );
 
 export default function Infracoes() {
-  return <DynamicListPage />;
+  return <CircularProgress color="error" size={10} />;
 }

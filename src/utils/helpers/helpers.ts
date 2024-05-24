@@ -1,4 +1,18 @@
 import { UploadsProps } from '@/components/pages/documents/Uploads/UploadsFormSchema';
+import infractionsTable from '../../../public/data/infractions-table.json';
+
+export const serializeToListInfractions = (data: any) =>
+  data.data[0].multas.map((multa: any) => {
+    const infractions = infractionsTable.find((item) => item.codDETRAN === multa.codigo);
+    console.log("infractions: ", infractions);
+    return {
+      infra: `${multa.codigo} - ${multa.descricao}`,
+      valorMulta: multa.normalizado_valor,
+      recursoSimples: infractions?.rec_simples || 0,
+      recursoEspecial: infractions?.rec_especial || 0,
+      dataDaInfracao: `${multa.data} ${multa.hora}`
+    };
+  });
 
 export const truncateText = (text: string, maxLength = 50) => {
   return text?.length > maxLength ? `${text.substring(0, maxLength)}...` : text;

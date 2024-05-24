@@ -20,7 +20,7 @@ const BoxDetails: React.FC<CardDetailsProps> = ({
         { title: 'Nome', value: name },
         { title: 'CPF', value: registrationNumber },
         { title: 'Detran', value: detran },
-        { title: 'Soma das Infrações', value: multaMeter }
+        { title: 'Valor Total', value: multaMeter }
       ]}
     />
   );

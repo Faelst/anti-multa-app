@@ -1,7 +1,10 @@
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+
 const DynamicContactLayout = dynamic(() => import('@/components/pages/contact'), {
-  loading: () => <p>Please wait...</p>
+  loading: () => <LoadingSpinner />
 });
 
 export const metadata: Metadata = {

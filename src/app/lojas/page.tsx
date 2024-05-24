@@ -1,7 +1,10 @@
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+
 const DynamicStoresLayout = dynamic(() => import('@/components/pages/stores'), {
-  loading: () => <p>Please wait...</p>
+  loading: () => <LoadingSpinner />
 });
 
 export const metadata: Metadata = {
