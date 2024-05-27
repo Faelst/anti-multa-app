@@ -32,10 +32,9 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       field: 'dataDaInfracao',
       align: 'center',
       action: (rowData) => {
-        const formattedDate = moment(rowData.dataDaInfracao).format('DD/MM/YYYY HH:mm');
         return (
           <div className="flex items-center space-x-2">
-            <span>{formattedDate}</span>
+            <span>{rowData.dataDaInfracao}</span>
           </div>
         );
       }

@@ -1,10 +1,10 @@
 import { UploadsProps } from '@/components/pages/documents/Uploads/UploadsFormSchema';
 import infractionsTable from '../../../public/data/infractions-table.json';
 
-export const serializeToListInfractions = (data: any) =>
-  data.data[0].multas.map((multa: any) => {
+export const serializeToListInfractions = (data: any) => {
+  const infractions = data.data[0].multas.map((multa: any) => {
     const infractions = infractionsTable.find((item) => item.codDETRAN === multa.codigo);
-    console.log("infractions: ", infractions);
+
     return {
       infra: `${multa.codigo} - ${multa.descricao}`,
       valorMulta: multa.normalizado_valor,
@@ -13,6 +13,21 @@ export const serializeToListInfractions = (data: any) =>
       dataDaInfracao: `${multa.data} ${multa.hora}`
     };
   });
+
+  const fines = data.data[0].autuacoes.map((autuacao: any) => {
+    const infraction = infractionsTable.find((item) => item.codDETRAN === autuacao.codigo);
+
+    return {
+      infra: `${autuacao.codigo} - ${autuacao.descricao}`,
+      valorMulta: Number(infraction?.valor || 0),
+      recursoSimples: infraction?.rec_simples || 0,
+      recursoEspecial: infraction?.rec_especial || 0,
+      dataDaInfracao: `${autuacao.data} ${autuacao.hora}`
+    };
+  });
+
+  return [...infractions, ...fines];
+};
 
 export const truncateText = (text: string, maxLength = 50) => {
   return text?.length > maxLength ? `${text.substring(0, maxLength)}...` : text;

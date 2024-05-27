@@ -23,7 +23,7 @@ const QueryForm = () => {
         required
         InputProps={{ inputProps: { maxLength: 100 } }}
         onChange={({ target }) => {
-          const value = target?.value?.toUpperCase() ?? '';
+          const value = target?.value ?? '';
           setValue('name', value);
         }}
       />
