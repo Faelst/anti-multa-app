@@ -1,0 +1,22 @@
+- se a data da data_defesa, ja tiver passado nao exibir na listagem [FEITO]
+
+- validador de cpf (https://www.npmjs.com/package/cpf-cnpj-validator) [FEITO]
+
+- trocar nome telefone para whatsapp [FEITO]
+
+- alterar link whatsapp para [FEITO]
+  - https://wa.me/5531987888526?text=olá%2C+meu+nome+é+USER%2C+gostaria+de+recorrer+minhas+multas%2C+segue+os+dados+do+meu+veículo%3A+PLACA%2C+CHASSI
+
+- adicionar checkbox para marcar CNH provisoria
+  - quando for provisoria, exibi na listagem de inflacao recurso especiais e remove o recurso simples
+
+- fazer tela PREENCHA OS DADOS PARA PROCURAÇÃO
+
+- fazer tela Detalhes do pedido
+
+- Ajuste na tela Forma de Pagamento
+  - adicionar tela de resumo dos itens
+
+- integrar com stripe checkout de pagamento
+
+- alterar table para o recurso do figma

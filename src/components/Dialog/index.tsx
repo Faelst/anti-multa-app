@@ -7,15 +7,19 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import { useDialogContext } from '@/context/dialogContext';
-import { useFormContext } from '../../context/formContext';
+import { useClient } from '@/context/clientContext';
 
 export default function AlertDialog() {
+  const { client } = useClient();
   const { openDialogHomeForm, setOpenDialogHomeForm } = useDialogContext();
 
   const handleClose = () => {
     setOpenDialogHomeForm(false);
 
-    window.open('https://wa.me/5531987888526', '_blank');
+    window.open(
+      `https://wa.me/5531987888526?text=olá%2C+meu+nome+é+${client.name}+gostaria+de+recorrer+minhas+multas%2C+segue+os+dados+do+meu+veículo%3A+PLACA%2C+${client.vehiclePlate}+CHASSI%2C+${client.chassi}`,
+      '_blank'
+    );
   };
 
   return (

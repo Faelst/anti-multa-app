@@ -1,4 +1,5 @@
 import { InferType, object, string } from 'yup';
+import { isValidCPF } from '../../../../utils';
 
 export function validationSchemaQueryForm() {
   return object().shape({
@@ -25,8 +26,12 @@ export function validationSchemaQueryForm() {
       .max(15, 'Telefone: Tamanho máximo excedido.'),
     cpf: string()
       .required('CPF: Precisa ser preenchido.')
-      .matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'CPF: Formato inválido. Ex: 000.000.000-00')
       .typeError('CPF inválido.')
+      .matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'CPF: Precisa ser no formato 000.000.000-00')
+      .test('is-valid-cpf', 'CPF inválido.', (value) => {
+        if (!value) return true;
+        return isValidCPF(value);
+      })
   });
 }
 

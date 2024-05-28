@@ -1,30 +1,35 @@
 import { UploadsProps } from '@/components/pages/documents/Uploads/UploadsFormSchema';
 import infractionsTable from '../../../public/data/infractions-table.json';
+import moment from 'moment';
 
 export const serializeToListInfractions = (data: any) => {
-  const infractions = data.data[0].multas.map((multa: any) => {
-    const infractions = infractionsTable.find((item) => item.codDETRAN === multa.codigo);
+  const infractions = data.data[0].multas
+    .filter((multa: any) => moment(multa.data_defesa, 'DD/MM/YYYY').isAfter(moment()))
+    .map((multa: any) => {
+      const infractions = infractionsTable.find((item) => item.codDETRAN === multa.codigo);
 
-    return {
-      infra: `${multa.codigo} - ${multa.descricao}`,
-      valorMulta: multa.normalizado_valor,
-      recursoSimples: infractions?.rec_simples || 0,
-      recursoEspecial: infractions?.rec_especial || 0,
-      dataDaInfracao: `${multa.data} ${multa.hora}`
-    };
-  });
+      return {
+        infra: `${multa.codigo} - ${multa.descricao}`,
+        valorMulta: multa.normalizado_valor,
+        recursoSimples: infractions?.rec_simples || 0,
+        recursoEspecial: infractions?.rec_especial || 0,
+        dataDaInfracao: `${multa.data} ${multa.hora}`
+      };
+    });
 
-  const fines = data.data[0].autuacoes.map((autuacao: any) => {
-    const infraction = infractionsTable.find((item) => item.codDETRAN === autuacao.codigo);
+  const fines = data.data[0].autuacoes
+    .filter((autuacoe: any) => moment(autuacoe.data_defesa, 'DD/MM/YYYY').isAfter(moment()))
+    .map((autuacao: any) => {
+      const infraction = infractionsTable.find((item) => item.codDETRAN === autuacao.codigo);
 
-    return {
-      infra: `${autuacao.codigo} - ${autuacao.descricao}`,
-      valorMulta: Number(infraction?.valor || 0),
-      recursoSimples: infraction?.rec_simples || 0,
-      recursoEspecial: infraction?.rec_especial || 0,
-      dataDaInfracao: `${autuacao.data} ${autuacao.hora}`
-    };
-  });
+      return {
+        infra: `${autuacao.codigo} - ${autuacao.descricao}`,
+        valorMulta: Number(infraction?.valor || 0),
+        recursoSimples: infraction?.rec_simples || 0,
+        recursoEspecial: infraction?.rec_especial || 0,
+        dataDaInfracao: `${autuacao.data} ${autuacao.hora}`
+      };
+    });
 
   return [...infractions, ...fines];
 };

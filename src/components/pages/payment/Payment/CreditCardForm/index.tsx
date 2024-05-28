@@ -2,7 +2,7 @@ import React from 'react';
 import { MaskedInput, TextFormField } from '@/components/FormField';
 import { SelectFormField } from '@/components/FormField/SelectFormField';
 import { Grid } from '@mui/material';
-import { cpfMask } from '@/utils';
+import { cpfMask, creditCardMask } from '@/utils';
 
 export default function CreditCardForm() {
   const installmentsRE = [
@@ -51,6 +51,10 @@ export default function CreditCardForm() {
           name="cardNumber"
           placeholder="0000 0000 0000 0000"
           required
+          InputProps={{
+            inputComponent: MaskedInput,
+            inputProps: { mask: creditCardMask }
+          }}
         />
       </Grid>
       <Grid item xs={6}>

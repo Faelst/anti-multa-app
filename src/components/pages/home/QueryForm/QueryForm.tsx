@@ -4,7 +4,7 @@ import { useFormContext } from '@/context/formContext';
 import { cpfMask, phoneMask, vehiclePlateMask } from '@/utils';
 
 const QueryForm = () => {
-  const { setValue, isSubmitting, setIsSubmitting } = useFormContext();
+  const { setValue, submitting } = useFormContext();
 
   const loading = () => {
     return (
@@ -43,7 +43,7 @@ const QueryForm = () => {
       />
       <TextFormField
         name="phone"
-        label="Telefone do solicitante"
+        label="WhatsApp do solicitante"
         placeholder="Ex: (00) 00000-0000"
         required
         InputProps={{
@@ -70,15 +70,8 @@ const QueryForm = () => {
         }}
       />
       <TextFormField name="chassi" label="Chassi" placeholder="Ex: 9B1234567C8901234" required />
-      <Button
-        fullWidth
-        className="my-2 rounded-full"
-        type="submit"
-        onClick={() => {
-          setIsSubmitting(true);
-        }}
-      >
-        {isSubmitting ? loading() : 'Consultar'}
+      <Button fullWidth className="my-2 rounded-full" type="submit">
+        {submitting ? loading() : 'Consultar'}
       </Button>
     </div>
   );

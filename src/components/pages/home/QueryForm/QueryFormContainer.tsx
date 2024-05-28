@@ -1,4 +1,4 @@
-import { FormProvider, useFormContext } from '@/context/formContext';
+import { FormProvider } from '@/context/formContext';
 import QueryForm from './QueryForm';
 import {
   QueryFormProps,
@@ -19,7 +19,6 @@ const QueryFormContainer = () => {
   const { setInfractionsData } = useInfractions();
   const { setClient } = useClient();
   const { setOpenDialogHomeForm } = useDialogContext();
-  const { setIsSubmitting } = useFormContext();
 
   const handleSubmit = async ({ chassi, vehiclePlate, cpf, name, phone }: QueryFormProps) => {
     api
@@ -35,10 +34,13 @@ const QueryFormContainer = () => {
     setClient({
       cpf,
       name,
-      phone
+      phone,
+      chassi,
+      vehiclePlate
     });
 
     try {
+      throw new Error('error');
       const { data } = await api.fetchTrafficInfractions({
         chassi,
         vehiclePlate
@@ -51,14 +53,12 @@ const QueryFormContainer = () => {
       router.push('/infracoes');
     } catch (error) {
       setOpenDialogHomeForm(true);
-
       console.log(error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
   const validationSchema = validationSchemaQueryForm();
+
   const defaultValues = defaultValuesQueryForm;
 
   return (

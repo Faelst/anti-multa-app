@@ -3,12 +3,24 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 import { useRouter } from 'next/navigation';
 
 interface ClientContextType {
-  client: any;
+  client: {
+    cpf: string;
+    name: string;
+    phone: string;
+    chassi: string;
+    vehiclePlate: string;
+  };
   setClient: (data: any) => void;
 }
 
 const ClientContext = createContext<ClientContextType>({
-  client: {},
+  client: {
+    cpf: '',
+    name: '',
+    phone: '',
+    chassi: '',
+    vehiclePlate: ''
+  },
   setClient: () => {}
 });
 
@@ -19,7 +31,13 @@ interface InfractionsProviderProps {
 }
 
 export const ClientProvider = ({ children }: InfractionsProviderProps) => {
-  const [client, setClient] = useState<any>({});
+  const [client, setClient] = useState<any>({
+    cpf: '',
+    name: '',
+    phone: '',
+    chassi: '',
+    vehiclePlate: ''
+  });
 
   return <ClientContext.Provider value={{ client, setClient }}>{children}</ClientContext.Provider>;
 };

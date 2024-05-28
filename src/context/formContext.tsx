@@ -31,8 +31,6 @@ type FormContextProps = {
   readOnly?: boolean;
   trigger: (name?: string | string[] | undefined) => Promise<boolean>;
   register: UseFormRegister<any>;
-  isSubmitting: boolean;
-  setIsSubmitting: (value: boolean) => void;
 };
 
 const FormContext = createContext<FormContextProps>({
@@ -63,10 +61,6 @@ const FormContext = createContext<FormContextProps>({
   },
   register: () => {
     throw new Error('formContext not initialized');
-  },
-  isSubmitting: false,
-  setIsSubmitting: () => {
-    throw new Error('formContext not initialized');
   }
 });
 
@@ -94,7 +88,6 @@ export const FormProvider = ({
   onChangeField,
   readOnly = false
 }: FormProviderProps) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const {
     register,
@@ -119,9 +112,10 @@ export const FormProvider = ({
   }, [reset, submitting]);
 
   const validationErrors = Object.keys(errors ?? {}).length ? errors : undefined;
+
   const formSubmit = async (values: FieldValues) => {
     setSubmitting(true);
-    console.log('FormContext - submiting', { values });
+
     try {
       const res = await onSubmit(values);
       setSubmitting(false);
@@ -129,6 +123,8 @@ export const FormProvider = ({
     } catch (error) {
       console.log('FormProvider - error submit', { error });
       onError && onError(error);
+      setSubmitting(false);
+    } finally {
       setSubmitting(false);
     }
   };
@@ -161,9 +157,7 @@ export const FormProvider = ({
         isValid,
         dirtyFields,
         trigger,
-        register,
-        isSubmitting,
-        setIsSubmitting
+        register
       }}
     >
       <ChangeFieldHandlers handlers={onChangeField}>
