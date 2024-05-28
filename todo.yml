@@ -7,8 +7,10 @@
 - alterar link whatsapp para [FEITO]
   - https://wa.me/5531987888526?text=olá%2C+meu+nome+é+USER%2C+gostaria+de+recorrer+minhas+multas%2C+segue+os+dados+do+meu+veículo%3A+PLACA%2C+CHASSI
 
-- adicionar checkbox para marcar CNH provisoria
+- adicionar checkbox para marcar CNH provisoria [FEITO]
   - quando for provisoria, exibi na listagem de inflacao recurso especiais e remove o recurso simples
+
+- Ajuste tela de listagem checkbox no recurso simples e especial [FEITO]
 
 - fazer tela PREENCHA OS DADOS PARA PROCURAÇÃO
 
@@ -20,3 +22,11 @@
 - integrar com stripe checkout de pagamento
 
 - alterar table para o recurso do figma
+
+
+---------------- timer ----------------
+- check-point 1
+  - 1h12m
+- check-point 2
+  - 35m
+- check-point 3

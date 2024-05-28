@@ -20,7 +20,14 @@ const QueryFormContainer = () => {
   const { setClient } = useClient();
   const { setOpenDialogHomeForm } = useDialogContext();
 
-  const handleSubmit = async ({ chassi, vehiclePlate, cpf, name, phone }: QueryFormProps) => {
+  const handleSubmit = async ({
+    chassi,
+    vehiclePlate,
+    cpf,
+    name,
+    phone,
+    provisionalLicense
+  }: QueryFormProps) => {
     api
       .registerClient({
         cpf,
@@ -36,11 +43,11 @@ const QueryFormContainer = () => {
       name,
       phone,
       chassi,
-      vehiclePlate
+      vehiclePlate,
+      provisionalLicense
     });
 
     try {
-      throw new Error('error');
       const { data } = await api.fetchTrafficInfractions({
         chassi,
         vehiclePlate

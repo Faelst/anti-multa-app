@@ -1,12 +1,15 @@
-import { Table, TableColumn } from '@/components';
-import { formatCurrency } from '@/utils';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { OpenDrawerDetails } from './ListOfInfractionsContainer';
-import { IconButton } from '@mui/material';
-import moment from 'moment';
 import { AiOutlineFileSearch } from 'react-icons/ai';
-import { Infraction } from '@/assets/icon';
 import { useTheme } from 'next-themes';
+import { IconButton } from '@mui/material';
+
+import { Checkbox, Table, TableColumn } from '@/components';
+import { Infraction } from '@/assets/icon';
+import { formatCurrency } from '@/utils';
+import { useInfractions } from '@/context/infracoesContext';
+import { useFormContext } from '@/context/formContext';
+import { OpenDrawerDetails } from './ListOfInfractionsContainer';
+import { useClient } from '../../../../context/clientContext';
 
 interface ListOfInfractionsProps {
   data: any[];
@@ -20,6 +23,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
   setInfractionsList,
   setRowData
 }) => {
+  const { client } = useClient();
   const [total] = useState(data.reduce((acc, curr) => acc + Number(curr.valorMulta), 0));
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -31,7 +35,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       label: 'Data da infração',
       field: 'dataDaInfracao',
       align: 'center',
-      action: (rowData) => {
+      action: (rowData: any) => {
         return (
           <div className="flex items-center space-x-2">
             <span>{rowData.dataDaInfracao}</span>
@@ -44,7 +48,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       label: 'Valor da Multa',
       field: 'valorMulta',
       align: 'center',
-      action: (rowData) => {
+      action: (rowData: any) => {
         const formattedCurrency = formatCurrency(Number(rowData.valorMulta));
         return (
           <div className="flex items-center space-x-2">
@@ -58,10 +62,11 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       label: 'Recurso Simples',
       field: 'recursoSimples',
       align: 'center',
-      action: (rowData) => {
+      action: (rowData: any) => {
         const formattedCurrency = formatCurrency(Number(rowData.recursoSimples));
         return (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
+            <Checkbox onChange={() => handleSetRecurseType(rowData, 'recursoSimples')} />
             <span>{formattedCurrency}</span>
           </div>
         );
@@ -72,10 +77,15 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       label: 'Recurso Especial',
       field: 'recursoEspecial',
       align: 'center',
-      action: (rowData) => {
+      action: (rowData: any) => {
         const formattedCurrency = formatCurrency(Number(rowData.recursoEspecial));
         return (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
+            <Checkbox
+              onChange={() => {
+                handleSetRecurseType(rowData, 'recursoEspecial');
+              }}
+            />
             <span>{formattedCurrency}</span>
           </div>
         );
@@ -98,7 +108,25 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
         );
       }
     }
-  ];
+  ].filter((column) => {
+    if (client.provisionalLicense) {
+      return column.key !== 'recursoSimples';
+    }
+    return column;
+  }) as TableColumn[];
+
+  const handleSetRecurseType = (rowData: any, recurseType: string) => {
+    setInfractionsList((old) => {
+      const index = old.findIndex(
+        (item) => item.infra === rowData.infra && item.valorMulta === rowData.valorMulta
+      );
+      if (index !== -1) {
+        old[index].recurseType = recurseType;
+        return [...old];
+      }
+      return old;
+    });
+  };
 
   const handleOnSelectionChange = (selectedRows: Record<string, any>[]) => {
     setInfractionsList(selectedRows);
@@ -109,7 +137,6 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       columns={columns}
       rows={data}
       totalValue={formatCurrency(total)}
-      checkboxSelection
       onSelectionChange={handleOnSelectionChange}
       onSelectedRow={(selectedRow) => setRowData(selectedRow)}
     />

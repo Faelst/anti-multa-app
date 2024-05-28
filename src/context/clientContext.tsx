@@ -9,6 +9,7 @@ interface ClientContextType {
     phone: string;
     chassi: string;
     vehiclePlate: string;
+    provisionalLicense: boolean;
   };
   setClient: (data: any) => void;
 }
@@ -19,7 +20,8 @@ const ClientContext = createContext<ClientContextType>({
     name: '',
     phone: '',
     chassi: '',
-    vehiclePlate: ''
+    vehiclePlate: '',
+    provisionalLicense: false
   },
   setClient: () => {}
 });
@@ -36,7 +38,8 @@ export const ClientProvider = ({ children }: InfractionsProviderProps) => {
     name: '',
     phone: '',
     chassi: '',
-    vehiclePlate: ''
+    vehiclePlate: '',
+    provisionalLicense: false
   });
 
   return <ClientContext.Provider value={{ client, setClient }}>{children}</ClientContext.Provider>;

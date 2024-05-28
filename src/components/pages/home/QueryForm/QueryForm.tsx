@@ -2,6 +2,7 @@ import { Button } from '@/components';
 import { MaskedInput, TextFormField } from '@/components/FormField';
 import { useFormContext } from '@/context/formContext';
 import { cpfMask, phoneMask, vehiclePlateMask } from '@/utils';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
 const QueryForm = () => {
   const { setValue, submitting } = useFormContext();
@@ -70,6 +71,12 @@ const QueryForm = () => {
         }}
       />
       <TextFormField name="chassi" label="Chassi" placeholder="Ex: 9B1234567C8901234" required />
+      <FormControlLabel
+        name="provisionalLicense"
+        control={<Checkbox color="error" />}
+        label="Carteira provisória"
+        onChange={({ target }: any) => setValue('provisionalLicense', target?.checked ?? false)}
+      />
       <Button fullWidth className="my-2 rounded-full" type="submit">
         {submitting ? loading() : 'Consultar'}
       </Button>

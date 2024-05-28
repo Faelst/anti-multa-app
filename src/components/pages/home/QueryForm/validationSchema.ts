@@ -1,4 +1,4 @@
-import { InferType, object, string } from 'yup';
+import { InferType, object, string, boolean } from 'yup';
 import { isValidCPF } from '../../../../utils';
 
 export function validationSchemaQueryForm() {
@@ -32,6 +32,8 @@ export function validationSchemaQueryForm() {
         if (!value) return true;
         return isValidCPF(value);
       })
+      .max(14, 'CPF: Tamanho máximo excedido.'),
+    provisionalLicense: boolean()
   });
 }
 
@@ -43,5 +45,6 @@ export const defaultValuesQueryForm = {
   chassi: null,
   name: null,
   phone: null,
-  cpf: null
+  cpf: null,
+  provisionalLicense: false
 };
