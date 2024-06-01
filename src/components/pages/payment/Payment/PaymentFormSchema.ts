@@ -28,7 +28,6 @@ export function validationSchemaPaymentForm(paymentMethod: string) {
     return object().shape({
       cardNumber: string()
         .required('Número do cartão: Precisa ser preenchido.')
-        .matches(/^\d{16}$/, 'Número do cartão: Precisa ter 16 dígitos')
         .typeError('Número do cartão é inválido.'),
       cardholderName: string()
         .required('Nome do titular do cartão: Precisa ser preenchido.')

@@ -12,21 +12,23 @@
 
 - Ajuste tela de listagem checkbox no recurso simples e especial [FEITO]
 
-- fazer tela PREENCHA OS DADOS PARA PROCURAÇÃO
+- fazer tela PREENCHA OS DADOS PARA PROCURAÇÃO [FEITO]
+  - integrar com o backend
 
 - fazer tela Detalhes do pedido
+  - integrar com o backend
 
-- Ajuste na tela Forma de Pagamento
+- Ajuste na tela Forma de Pagamento [FEITO]
   - adicionar tela de resumo dos itens
 
 - integrar com stripe checkout de pagamento
 
-- alterar table para o recurso do figma
+- alterar table para o recurso do figma [FEITO]
 
 
 ---------------- timer ----------------
 - check-point 1
   - 1h12m
 - check-point 2
-  - 35m
+  - 48m
 - check-point 3

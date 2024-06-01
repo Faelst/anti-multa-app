@@ -132,6 +132,7 @@ export const FormProvider = ({
   const htmlSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    handleSubmit(formSubmit, onError);
     return handleSubmit(formSubmit, onError)(event);
   };
 

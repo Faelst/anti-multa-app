@@ -9,6 +9,7 @@ const InfractionsDetails: FunctionComponent<InfractionsDetails> = ({ infractions
   const infra = infractionsData.infra;
   const valorMulta = infractionsData.valorMulta;
   const dataDaInfracao = infractionsData.dataDaInfracao;
+
   return (
     <>
       <CardData

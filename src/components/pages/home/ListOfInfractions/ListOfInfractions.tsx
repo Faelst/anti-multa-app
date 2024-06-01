@@ -132,13 +132,17 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
     setInfractionsList(selectedRows);
   };
 
+  const handleSelectedRow = (selectedRow: any) => {
+    console.log('selectedRow', selectedRow);
+  };
+
   return (
     <Table
       columns={columns}
       rows={data}
       totalValue={formatCurrency(total)}
       onSelectionChange={handleOnSelectionChange}
-      onSelectedRow={(selectedRow) => setRowData(selectedRow)}
+      onSelectedRow={handleSelectedRow}
     />
   );
 };

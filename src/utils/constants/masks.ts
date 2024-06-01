@@ -48,6 +48,22 @@ export const cnpjMask = [
   /\d/
 ];
 
+// /^(\d{1,2})(\d{3})(\d{3})([\dX])$/,'$1.$2.$3-$4'
+export const rgMask = [
+  /\d/,
+  /\d/,
+  '.',
+  /\d/,
+  /\d/,
+  /\d/,
+  '.',
+  /\d/,
+  /\d/,
+  /\d/,
+  '-',
+  /[A-Za-z0-9]/
+];
+
 export const cpfMask = [
   /\d/,
   /\d/,
@@ -86,3 +102,5 @@ export const creditCardMask = [
   /\d/,
   /\d/
 ];
+
+export const cepMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];

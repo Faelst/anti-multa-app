@@ -19,7 +19,7 @@ const ListOfInfractionsContainer = () => {
 
   const handleOnClose = () => setOpenDrawer(undefined);
   const handleBackClick = () => setDetails(false);
-  const handleNextClick = () => route.push('/infracoes/pagamento');
+  const handleNextClick = () => route.push('/infracoes/pagamento/cadastro');
 
   return (
     <>

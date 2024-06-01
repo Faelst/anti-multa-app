@@ -6,6 +6,7 @@ import { getObjectPropertyValue } from '@/utils';
 
 interface TextFormFieldProps extends TextFieldProps {
   name: string;
+  shrink?: boolean;
 }
 
 export const TextFormField = (props: TextFormFieldProps) => {
@@ -27,6 +28,9 @@ export const TextFormField = (props: TextFormFieldProps) => {
               errorsMessage ? 'border-red-500 focus:shadow-none' : ''
             } mb-2 rounded px-4 py-3 leading-tight focus:outline-none 
                 `}
+            InputLabelProps={{
+              shrink: props.shrink ?? shrink
+            }}
           />
         )}
         name={name}
