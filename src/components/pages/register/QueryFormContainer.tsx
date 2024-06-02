@@ -1,21 +1,48 @@
 import { FormProvider } from '@/context/formContext';
+import { useRouter } from 'next/navigation';
 import {
   defaultValuesQueryForm,
   QueryFormProps,
   validationSchemaQueryForm
 } from './validationSchema';
 import QueryForm from './QueryForm';
-import { useClient } from '../../../context/clientContext';
-import { useRouter } from 'next/navigation';
+import { useClient } from '@/context/clientContext';
+import api from '@/service/api';
 
 const QueryFormContainer = () => {
   const route = useRouter();
-  const { client } = useClient();
+  const { client, setClient } = useClient();
 
-  const handleSubmit = (data: QueryFormProps) => {
-    console.log(client);
-    console.log(data);
-    route.push('/infracoes/pagamento/documentos');
+  const handleSubmit = async (data: QueryFormProps) => {
+    try {
+      await api.addAddress({
+        street: data.street,
+        number: data.number,
+        neighborhood: data.neighborhood,
+        city: data.city,
+        state: data.uf,
+        zipCode: data.cep,
+        complement: data.complement,
+        customerId: client.id
+      });
+
+      setClient((prev: any) => ({
+        ...prev,
+        address: {
+          street: data.street,
+          number: data.number,
+          neighborhood: data.neighborhood,
+          city: data.city,
+          state: data.uf,
+          zipCode: data.cep,
+          complement: data.complement
+        }
+      }));
+
+      route.push('/infracoes/pagamento/documentos');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const validationSchema = validationSchemaQueryForm();

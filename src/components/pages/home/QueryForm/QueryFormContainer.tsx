@@ -28,26 +28,23 @@ const QueryFormContainer = () => {
     phone,
     provisionalLicense
   }: QueryFormProps) => {
-    api
-      .registerClient({
+    try {
+      const customer = await api.registerClient({
         cpf,
         name,
         phone
-      })
-      .catch((error) => {
-        console.log(error);
       });
 
-    setClient({
-      cpf,
-      name,
-      phone,
-      chassi,
-      vehiclePlate,
-      provisionalLicense
-    });
+      setClient({
+        id: customer.data.id,
+        cpf,
+        name,
+        phone,
+        chassi,
+        vehiclePlate,
+        provisionalLicense
+      });
 
-    try {
       const { data } = await api.fetchTrafficInfractions({
         chassi,
         vehiclePlate

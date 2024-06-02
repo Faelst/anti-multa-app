@@ -6,8 +6,10 @@ import { Button, Typography } from '@/components/UI/atoms';
 import { MaskedInput, TextFormField } from '../../FormField';
 import { Card, Grid } from '@mui/material';
 import { cepMask, cpfMask, rgMask } from '../../../utils';
+import { useClient } from '@/context/clientContext';
 
 const QueryForm = () => {
+  const { client } = useClient();
   const { setValue, submitting, watch } = useFormContext();
 
   const cep = watch('cep')?.replace(/\s|-/g, '');
@@ -21,9 +23,18 @@ const QueryForm = () => {
           setValue('city', data.localidade);
           setValue('neighborhood', data.bairro);
           setValue('street', data.logradouro);
+          setValue('zipCode', data.cep);
         });
     }
   }, [cep]);
+
+  useEffect(() => {
+    if (client) {
+      setValue('name', client.name);
+      setValue('cpf', client.cpf);
+      setValue('phone', client.phone);
+    }
+  }, []);
 
   const loading = () => {
     return (

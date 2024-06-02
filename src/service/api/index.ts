@@ -7,10 +7,16 @@ interface FetchTrafficInfractionsParams {
 }
 
 const api = {
+  addAddress: async (data: any): Promise<AxiosResponse> => {
+    const api = await getAxiosInstance();
+
+    return api.post('/customer/add-address', data);
+  },
+
   registerClient: async (data: any): Promise<AxiosResponse> => {
     const api = await getAxiosInstance();
 
-    return api.post('/clients', data);
+    return api.post('/customer', data);
   },
 
   fetchTrafficInfractions: async ({
