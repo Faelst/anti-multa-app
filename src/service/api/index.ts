@@ -7,6 +7,12 @@ interface FetchTrafficInfractionsParams {
 }
 
 const api = {
+  createSolicitation: async (data: any): Promise<AxiosResponse> => {
+    const api = await getAxiosInstance();
+
+    return api.post('/solicitation', data);
+  },
+
   addAddress: async (data: any): Promise<AxiosResponse> => {
     const api = await getAxiosInstance();
 

@@ -8,10 +8,10 @@ import {
 import TermOfUse from './TermOfUse';
 import { useRouter } from 'next/navigation';
 import { useInfractions } from '@/context/infracoesContext';
-import api from '../../../../service/api';
-import { useClient } from '../../../../context/clientContext';
-import { serializeToListInfractions } from '../../../../utils';
-import { useDialogContext } from '../../../../context/dialogContext';
+import api from '@/service/api';
+import { useClient } from '@/context/clientContext';
+import { serializeToListInfractions } from '@/utils';
+import { useDialogContext } from '@/context/dialogContext';
 
 const QueryFormContainer = () => {
   const router = useRouter();
