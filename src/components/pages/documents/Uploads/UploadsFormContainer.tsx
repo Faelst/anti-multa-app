@@ -8,16 +8,20 @@ import { Button } from '@/components/UI/atoms';
 import { Grid } from '@mui/material';
 import { UploadIcon } from '@/components/UI/Icons';
 import { extractAndConvertFiles } from '@/utils';
+import { useRouter } from 'next/navigation';
 
 interface UploadsFormData {}
 
 const UploadsFormContainer: React.FC<UploadsFormData> = () => {
+  const route = useRouter();
   const [sendDocument, setSendDocument] = React.useState(true);
 
   const handleOnSubmit = async (value: UploadsProps) => {
     const base64Files = await extractAndConvertFiles(value);
     console.log('onsubmit', value);
     debugger;
+
+    route.push('/infracoes/pagamento/check-out');
   };
 
   const validationSchema = validationSchemaDocForm();

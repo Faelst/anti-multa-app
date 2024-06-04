@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import FineSummary from '../../FineSummary';
 import api from '@/service/api';
 import { useClient } from '../../../../context/clientContext';
+import { useSolicitationsContext } from '../../../../context/solicitationContext';
 
 export type OpenDrawerDetails = 'infractionsDetails' | 'resourceDetails';
 
@@ -15,6 +16,7 @@ const ListOfInfractionsContainer = () => {
   const route = useRouter();
   const { client } = useClient();
   const { infractionsData } = useInfractions();
+  const { setSolicitations } = useSolicitationsContext();
   const [rowData, setRowData] = useState();
   const [infractionsList, setInfractionsList] = useState<any[]>([]);
   const [openDrawer, setOpenDrawer] = useState<OpenDrawerDetails | undefined>();
@@ -24,33 +26,31 @@ const ListOfInfractionsContainer = () => {
 
   const handleBackClick = () => setDetails(false);
 
-  const handleNextClick = () => {
-    // criar solicitação aqui
-    console.log('infractionsData', infractionsData);
-    console.log('infractionsList', infractionsList);
-    // api.createSolicitation({
-    //   customerId: 'clwv56mjp0000fjwwi7xipn4o',
-    //   inflations: [
-    //     {
-    //       simpleAmount: infraction.recursoSimples,
-    //       especialAmount: infraction.recursoEspecial,
-    //       inflationAmount: infraction.valorMulta,
-    //       paymentAmount: infraction[infraction.recurseType],
-    //       type: 'multa',
-    //       description: 'TRANSITAR EM VELOCIDADE SUPERIOR A MAXIMA PERMITIDA EM ATE 20',
-    //       vehiclePlate: 'HCE7383',
-    //       chassis: '3N1BC1AS2CL356451',
-    //       date: '2025-08-21T00:00:00.000Z',
-    //       hour: '14:47',
-    //       dateInclude: '2023-11-06T00:00:00.000Z',
-    //       defenseDate: '2021-12-06T00:00:00.000Z',
-    //       situation: 'A PAGAR',
-    //       code: '745-50'
-    //     }
-    //   ]
-    // });
+  const handleNextClick = async () => {
+    const solicitations = await api.createSolicitation({
+      customerId: client.id,
+      infractions: infractionsList.map((infraction) => ({
+        simpleAmount: infraction.recursoSimples,
+        especialAmount: infraction.recursoEspecial,
+        inflationAmount: infraction.valorMulta,
+        paymentAmount: infraction[infraction.recurseType],
+        type: infraction.type,
+        description: infraction.descricao,
+        vehiclePlate: client.vehiclePlate,
+        chassis: client.chassi,
+        date: infraction.date,
+        hour: infraction.hour,
+        dateInclude: infraction.dateInclude,
+        defenseDate: infraction.defenseDate,
+        situation: infraction.situation,
+        code: infraction.code,
+        location: infraction.location
+      }))
+    });
 
-    // route.push('/infracoes/pagamento/cadastro');
+    setSolicitations(solicitations.data);
+
+    route.push('/infracoes/pagamento/cadastro');
   };
 
   return (

@@ -120,15 +120,18 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       const index = old.findIndex(
         (item) => item.infra === rowData.infra && item.valorMulta === rowData.valorMulta
       );
+
       if (index !== -1) {
         old[index].recurseType = recurseType;
         return [...old];
       }
+
       return old;
     });
   };
 
   const handleOnSelectionChange = (selectedRows: Record<string, any>[]) => {
+    console.log('selectedRows', selectedRows);
     setInfractionsList(selectedRows);
   };
 

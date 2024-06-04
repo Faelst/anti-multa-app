@@ -13,7 +13,17 @@ export const serializeToListInfractions = (data: any) => {
         valorMulta: multa.normalizado_valor,
         recursoSimples: infractions?.rec_simples || 0,
         recursoEspecial: infractions?.rec_especial || 0,
-        dataDaInfracao: `${multa.data} ${multa.hora}`
+        dataDaInfracao: `${multa.data} ${multa.hora}`,
+        type: 'multa',
+        descricao: multa.descricao,
+        date: multa.data,
+        hour: multa.hora,
+        dateInclude: multa.data_incluida,
+        defenseDate: multa.data_defesa,
+        situation: multa.situacao,
+        code: multa.codigo,
+        location: multa.local,
+        recurseType: ''
       };
     });
 
@@ -27,7 +37,17 @@ export const serializeToListInfractions = (data: any) => {
         valorMulta: Number(infraction?.valor || 0),
         recursoSimples: infraction?.rec_simples || 0,
         recursoEspecial: infraction?.rec_especial || 0,
-        dataDaInfracao: `${autuacao.data} ${autuacao.hora}`
+        dataDaInfracao: `${autuacao.data} ${autuacao.hora}`,
+        type: 'autuacao',
+        descricao: autuacao.descricao,
+        date: autuacao.data,
+        hour: autuacao.hora,
+        dateInclude: autuacao.data_incluida,
+        defenseDate: autuacao.data_defesa,
+        situation: autuacao.situacao,
+        code: autuacao.codigo,
+        location: autuacao.local,
+        recurseType: ''
       };
     });
 
