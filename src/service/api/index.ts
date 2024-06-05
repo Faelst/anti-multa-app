@@ -1,12 +1,31 @@
 import { AxiosResponse } from 'axios';
 import getAxiosInstance from './instance';
+import { create } from 'lodash';
 
 interface FetchTrafficInfractionsParams {
   vehiclePlate: string;
   chassi: string;
 }
 
+interface CreatePaymentParams {
+  creditCard: {
+    installments: number;
+    number: string;
+    holderName: string;
+    expMonth: number;
+    expYear: number;
+    cvv: number;
+  };
+  solicitationId: string;
+}
+
 const api = {
+  createPayment: async (data: CreatePaymentParams): Promise<AxiosResponse> => {
+    const api = await getAxiosInstance();
+
+    return api.post('/payment', data);
+  },
+
   createSolicitation: async (data: any): Promise<AxiosResponse> => {
     const api = await getAxiosInstance();
 
