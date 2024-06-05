@@ -18,26 +18,24 @@ const PaymentFormContainer: FunctionComponent = () => {
   } = useSolicitationsContext();
   const [paymentMethod, setPaymentMethod] = useState('credit-card');
 
-  const handleNextPage = () => route.push('/infracoes/pagamento/detalhes');
-
   const handleOnSubmit = async (value: FieldValues) => {
-    console.log({ value });
+    try {
+      const payment = await api.createPayment({
+        creditCard: {
+          installments: value.installments,
+          number: value.cardNumber,
+          holderName: value.cardholderName,
+          expMonth: Number(value.expirationDate.split('/')[0]),
+          expYear: Number(value.expirationDate.split('/')[1]),
+          cvv: value.cvv
+        },
+        solicitationId: solicitation.id
+      });
 
-    const payment = await api.createPayment({
-      creditCard: {
-        installments: value.installments,
-        number: value.cardNumber,
-        holderName: value.cardholderName,
-        expMonth: Number(value.expirationDate.split('/')[0]),
-        expYear: Number(value.expirationDate.split('/')[1]),
-        cvv: value.cvv
-      },
-      solicitationId: solicitation.id
-    });
-
-    console.log(payment);
-
-    handleNextPage();
+      route.push('/infracoes/pagamento/detalhes', payment);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const validationSchema = validationSchemaPaymentForm(paymentMethod);
