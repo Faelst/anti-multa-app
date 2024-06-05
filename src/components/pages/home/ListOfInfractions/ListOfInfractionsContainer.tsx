@@ -51,7 +51,7 @@ const ListOfInfractionsContainer = () => {
 
     setSolicitations(solicitations.data);
 
-    route.push('/infracoes/pagamento/cadastro');
+    route.push('/infracoes/pagamento/detalhes');
   };
 
   return (
