@@ -32,7 +32,7 @@ const PaymentFormContainer: FunctionComponent = () => {
         solicitationId: solicitation.id
       });
 
-      route.push('/infracoes/pagamento/detalhes', payment);
+      route.push('/infracoes/pagamento/detalhes');
     } catch (error) {
       console.log(error);
     }
