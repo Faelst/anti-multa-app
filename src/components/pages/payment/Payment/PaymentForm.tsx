@@ -15,12 +15,13 @@ interface PaymentFormProps {
 
 export default function PaymentForm({ paymentMethod, setPaymentMethod }: PaymentFormProps) {
   const { reset } = useFormContext();
+
   const handleOnCreditCard = () => {
-    // reset();
+    reset();
     setPaymentMethod('credit-card');
   };
   const handleOnPix = () => {
-    // reset();
+    reset();
     setPaymentMethod('pix');
   };
 

@@ -6,8 +6,6 @@ import { IconButton } from '@mui/material';
 import { Checkbox, Table, TableColumn } from '@/components';
 import { Infraction } from '@/assets/icon';
 import { formatCurrency } from '@/utils';
-import { useInfractions } from '@/context/infracoesContext';
-import { useFormContext } from '@/context/formContext';
 import { OpenDrawerDetails } from './ListOfInfractionsContainer';
 import { useClient } from '../../../../context/clientContext';
 

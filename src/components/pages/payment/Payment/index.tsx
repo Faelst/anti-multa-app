@@ -13,10 +13,11 @@ const PaymentFormContainer: FunctionComponent = () => {
   const route = useRouter();
   const [paymentMethod, setPaymentMethod] = useState('credit-card');
 
-  const handleNextPage = () => route.push('/infracoes/pagamento/cadastro');
+  const handleNextPage = () => route.push('/infracoes/pagamento/detalhes');
 
   const handleOnSubmit = (value: FieldValues) => {
     console.log({ value });
+
     handleNextPage();
   };
 

@@ -1,6 +1,7 @@
 import { UploadsProps } from '@/components/pages/documents/Uploads/UploadsFormSchema';
 import infractionsTable from '../../../public/data/infractions-table.json';
 import moment from 'moment';
+import { formatCurrency } from '../format';
 
 export const serializeToListInfractions = (data: any) => {
   const infractions = data.data[0].multas
@@ -93,3 +94,54 @@ export function extractAndConvertFiles(data: UploadsProps) {
   const fileConversions = allFiles.map((file) => convertBase64(file));
   return Promise.all(fileConversions);
 }
+
+export const installmentsRE = (amountPayment: number) => [
+  {
+    value: 1,
+    label: `1x ${formatCurrency(amountPayment)}`
+  },
+  {
+    value: 2,
+    label: `2x ${formatCurrency(amountPayment / 2)}`
+  },
+  {
+    value: 3,
+    label: `3x ${formatCurrency(amountPayment / 3)}`
+  },
+  {
+    value: 4,
+    label: `4x ${formatCurrency(amountPayment / 4)}`
+  },
+  {
+    value: 5,
+    label: `5x ${formatCurrency(amountPayment / 5)}`
+  },
+  {
+    value: 6,
+    label: `6x ${formatCurrency(amountPayment / 6)}`
+  },
+  {
+    value: 7,
+    label: `7x ${formatCurrency(amountPayment / 7)}`
+  },
+  {
+    value: 8,
+    label: `8x ${formatCurrency(amountPayment / 8)}`
+  },
+  {
+    value: 9,
+    label: `9x ${formatCurrency(amountPayment / 9)}`
+  },
+  {
+    value: 10,
+    label: `10x ${formatCurrency(amountPayment / 10)}`
+  },
+  {
+    value: 11,
+    label: `11x ${formatCurrency(amountPayment / 11)}`
+  },
+  {
+    value: 12,
+    label: `12x ${formatCurrency(amountPayment / 12)}`
+  }
+];

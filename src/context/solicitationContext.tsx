@@ -2,12 +2,12 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface SolicitationsContextType {
-  solicitations: any[];
+  solicitation: any;
   setSolicitations: (data: any) => void;
 }
 
 const SolicitationsContext = createContext<SolicitationsContextType>({
-  solicitations: [],
+  solicitation: [],
   setSolicitations: () => {}
 });
 
@@ -18,10 +18,10 @@ interface ProviderProps {
 }
 
 export const SolicitationsProvider = ({ children }: ProviderProps) => {
-  const [solicitations, setSolicitations] = useState<any[]>([]);
+  const [solicitation, setSolicitations] = useState<any[]>([]);
 
   return (
-    <SolicitationsContext.Provider value={{ solicitations, setSolicitations }}>
+    <SolicitationsContext.Provider value={{ solicitation, setSolicitations }}>
       {children}
     </SolicitationsContext.Provider>
   );
