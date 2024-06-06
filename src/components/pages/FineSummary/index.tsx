@@ -8,6 +8,7 @@ interface InfractionData {
   valorMulta: string;
   recursoSimples: number;
   recursoEspecial: number;
+  recurseType: string;
 }
 
 interface FineSummaryProps {
@@ -17,14 +18,19 @@ interface FineSummaryProps {
 }
 
 const calculateTotalFine = (infractionsList: InfractionData[]) => {
-  return infractionsList.reduce((total, { valorMulta }) => {
-    const value = parseFloat(String(valorMulta).replace('R$ ', '').replace(',', '.'));
+  return infractionsList.reduce((total, { recurseType, recursoEspecial, recursoSimples }) => {
+    const value = parseFloat(
+      String(recurseType === 'recursoSimples' ? recursoSimples : recursoEspecial)
+        .replace('R$ ', '')
+        .replace(',', '.')
+    );
     return total + value;
   }, 0);
 };
 
 const FineSummary: React.FC<FineSummaryProps> = ({ infractionsList, onBackClick, onNextClick }) => {
   const totalFine = calculateTotalFine(infractionsList);
+
   return (
     <section className="mx-auto mt-8 max-w-3xl">
       <div className="grid grid-cols-1 gap-4 rounded-md border border-gray-300 bg-white p-6 sm:p-8 md:dark:bg-[#18171e]">

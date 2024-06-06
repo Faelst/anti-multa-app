@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Checkbox } from '@/components';
 import { TableRowProps } from './TableRow.interface';
 
@@ -7,15 +7,20 @@ export const TableRow: FunctionComponent<TableRowProps> = ({
   rowData,
   checkboxSelection,
   isChecked,
-  onCheckboxChange,
-  onRowSelectionChange
+  onCheckboxChange
 }) => {
-  const handleCheckboxChange = () => {
-    onCheckboxChange(rowData);
-  };
+  const [recursoSimplesChecked, setRecursoSimplesChecked] = useState(false);
+  const [recursoEspecialChecked, setRecursoEspecialChecked] = useState(false);
 
-  const handleRowClick = () => {
-    onRowSelectionChange && onRowSelectionChange(rowData);
+  const handleCheckboxChange = (field: string) => {
+    onCheckboxChange(rowData, field);
+    if (field === 'recursoSimples') {
+      setRecursoSimplesChecked(!recursoSimplesChecked);
+      setRecursoEspecialChecked(false);
+    } else if (field === 'recursoEspecial') {
+      setRecursoEspecialChecked(!recursoEspecialChecked);
+      setRecursoSimplesChecked(false);
+    }
   };
 
   return (
@@ -23,13 +28,12 @@ export const TableRow: FunctionComponent<TableRowProps> = ({
       className={`max-h-12 odd:bg-white even:bg-gray-50 md:dark:odd:bg-[#15141b] md:dark:even:bg-gray-700 ${
         checkboxSelection ? 'cursor-pointer' : ''
       }`}
-      onClick={handleRowClick}
     >
       {checkboxSelection && (
         <td>
           <Checkbox
             checked={isChecked}
-            onClick={handleCheckboxChange}
+            onClick={() => handleCheckboxChange('checkbox')}
             formControlSX={{
               '&.MuiFormControlLabel-root': {
                 marginRight: -2,
@@ -39,9 +43,11 @@ export const TableRow: FunctionComponent<TableRowProps> = ({
           />
         </td>
       )}
+
       {columns.map((column) => {
         const cellWidth =
           rowData[column.field] && rowData[column.field].length > 40 ? 'w-10' : 'w-auto';
+
         return (
           <td
             key={column.key}
@@ -50,7 +56,21 @@ export const TableRow: FunctionComponent<TableRowProps> = ({
             } font-normal text-gray-800 md:dark:text-gray-200 ${cellWidth}`}
           >
             {column.action ? (
-              <p className="flex max-h-1 items-center">{column.action(rowData)}</p>
+              column.isCheckbox ? (
+                <>
+                  <Checkbox
+                    onChange={() => handleCheckboxChange(column.field)}
+                    checked={
+                      column.field === 'recursoSimples'
+                        ? recursoSimplesChecked
+                        : recursoEspecialChecked
+                    }
+                  />
+                  <p className="flex max-h-1 items-center">{column.action(rowData)}</p>
+                </>
+              ) : (
+                <p className="flex max-h-1 items-center">{column.action(rowData)}</p>
+              )
             ) : (
               <p className={`truncate ${rowData[column.field].length > 40 ? 'w-[350px]' : ''}`}>
                 {rowData[column.field]}

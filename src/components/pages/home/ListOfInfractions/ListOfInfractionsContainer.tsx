@@ -33,8 +33,7 @@ const ListOfInfractionsContainer = () => {
         simpleAmount: infraction.recursoSimples,
         especialAmount: infraction.recursoEspecial,
         inflationAmount: infraction.valorMulta,
-        // paymentAmount: infraction[infraction.recurseType],
-        paymentAmount: 130,
+        paymentAmount: infraction[infraction.recurseType],
         type: infraction.type,
         description: infraction.descricao,
         vehiclePlate: client.vehiclePlate,
@@ -73,6 +72,7 @@ const ListOfInfractionsContainer = () => {
               setOpenDrawer={setOpenDrawer}
               setInfractionsList={setInfractionsList}
               setRowData={setRowData}
+              details={details}
             />
             <DrawerDetails
               handleOnClose={handleOnClose}

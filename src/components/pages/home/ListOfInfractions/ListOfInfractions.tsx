@@ -14,12 +14,14 @@ interface ListOfInfractionsProps {
   setOpenDrawer: Dispatch<SetStateAction<OpenDrawerDetails | undefined>>;
   setInfractionsList: Dispatch<SetStateAction<any[]>>;
   setRowData: Dispatch<SetStateAction<any>>;
+  details: boolean;
 }
 const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
   data,
   setOpenDrawer,
   setInfractionsList,
-  setRowData
+  setRowData,
+  details
 }) => {
   const { client } = useClient();
   const [total] = useState(data.reduce((acc, curr) => acc + Number(curr.valorMulta), 0));
@@ -60,11 +62,11 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       label: 'Recurso Simples',
       field: 'recursoSimples',
       align: 'center',
+      isCheckbox: true,
       action: (rowData: any) => {
         const formattedCurrency = formatCurrency(Number(rowData.recursoSimples));
         return (
           <div className="flex items-center">
-            <Checkbox onChange={() => handleSetRecurseType(rowData, 'recursoSimples')} />
             <span>{formattedCurrency}</span>
           </div>
         );
@@ -75,15 +77,11 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       label: 'Recurso Especial',
       field: 'recursoEspecial',
       align: 'center',
+      isCheckbox: true,
       action: (rowData: any) => {
         const formattedCurrency = formatCurrency(Number(rowData.recursoEspecial));
         return (
           <div className="flex items-center">
-            <Checkbox
-              onChange={() => {
-                handleSetRecurseType(rowData, 'recursoEspecial');
-              }}
-            />
             <span>{formattedCurrency}</span>
           </div>
         );
@@ -113,28 +111,8 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
     return column;
   }) as TableColumn[];
 
-  const handleSetRecurseType = (rowData: any, recurseType: string) => {
-    setInfractionsList((old) => {
-      const index = old.findIndex(
-        (item) => item.infra === rowData.infra && item.valorMulta === rowData.valorMulta
-      );
-
-      if (index !== -1) {
-        old[index].recurseType = recurseType;
-        return [...old];
-      }
-
-      return old;
-    });
-  };
-
   const handleOnSelectionChange = (selectedRows: Record<string, any>[]) => {
-    console.log('selectedRows', selectedRows);
     setInfractionsList(selectedRows);
-  };
-
-  const handleSelectedRow = (selectedRow: any) => {
-    console.log('selectedRow', selectedRow);
   };
 
   return (
@@ -143,7 +121,6 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       rows={data}
       totalValue={formatCurrency(total)}
       onSelectionChange={handleOnSelectionChange}
-      onSelectedRow={handleSelectedRow}
     />
   );
 };

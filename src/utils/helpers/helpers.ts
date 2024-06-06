@@ -2,6 +2,7 @@ import { UploadsProps } from '@/components/pages/documents/Uploads/UploadsFormSc
 import infractionsTable from '../../../public/data/infractions-table.json';
 import moment from 'moment';
 import { formatCurrency } from '../format';
+import { v1 as uuid } from 'uuid';
 
 export const serializeToListInfractions = (data: any) => {
   const infractions = data.data[0].multas
@@ -10,6 +11,7 @@ export const serializeToListInfractions = (data: any) => {
       const infractions = infractionsTable.find((item) => item.codDETRAN === multa.codigo);
 
       return {
+        id: uuid(),
         infra: `${multa.codigo} - ${multa.descricao}`,
         valorMulta: multa.normalizado_valor,
         recursoSimples: infractions?.rec_simples || 0,
@@ -34,6 +36,7 @@ export const serializeToListInfractions = (data: any) => {
       const infraction = infractionsTable.find((item) => item.codDETRAN === autuacao.codigo);
 
       return {
+        id: uuid(),
         infra: `${autuacao.codigo} - ${autuacao.descricao}`,
         valorMulta: Number(infraction?.valor || 0),
         recursoSimples: infraction?.rec_simples || 0,

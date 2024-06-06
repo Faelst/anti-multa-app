@@ -1,5 +1,5 @@
 'use client';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { TableProps } from './Table.interface';
 import { Pagination } from '../../../../molecules';
 import { TableHeader } from '../TableHeader';
@@ -41,33 +41,40 @@ export const Table: FunctionComponent<TableProps> = ({
     }
   };
 
-  const handleCheckboxChange = (rowData: Record<string, any>) => {
-    const index = selectedRows.findIndex((row) => row === rowData);
-    if (index === -1) {
-      const updatedSelectedRows = [...selectedRows, rowData];
-      setSelectedRows(updatedSelectedRows);
-      onSelectionChange && onSelectionChange(updatedSelectedRows);
-    } else {
-      const updatedSelectedRows = [...selectedRows];
-      updatedSelectedRows.splice(index, 1);
-      setSelectedRows(updatedSelectedRows);
-      onSelectionChange && onSelectionChange(updatedSelectedRows);
-    }
-  };
+  const handleCheckboxChange = (rowData: Record<string, any>, field: string) => {
+    const index = selectedRows.findIndex((row) => row.id === rowData.id);
 
-  const handleRowSelectionChange = (rowData: Record<string, any>) => {
-    const index = selectedRows.findIndex((row) => row === rowData);
     if (index === -1) {
-      const updatedSelectedRows = [...selectedRows, rowData];
+      const updatedSelectedRows = [...selectedRows, { ...rowData, recurseType: field }];
       setSelectedRows(updatedSelectedRows);
       onSelectionChange && onSelectionChange(updatedSelectedRows);
-      onSelectedRow(rowData);
-    } else {
-      const updatedSelectedRows = [...selectedRows];
-      updatedSelectedRows.splice(index, 1);
-      setSelectedRows(updatedSelectedRows);
-      onSelectionChange && onSelectionChange(updatedSelectedRows);
+      return;
     }
+
+    const indexOfExistingWithSameField = selectedRows.findIndex(
+      (row) => row.id === rowData.id && row.recurseType === field
+    );
+
+    if (indexOfExistingWithSameField === -1) {
+      const updatedSelectedRows = selectedRows.map((row) => {
+        if (row.id === rowData.id) {
+          return { ...rowData, recurseType: field };
+        }
+
+        return row;
+      });
+
+      setSelectedRows(updatedSelectedRows);
+      onSelectionChange && onSelectionChange(updatedSelectedRows);
+
+      return;
+    }
+
+    const updatedSelectedRows = selectedRows.filter((row) => row.id !== rowData.id);
+
+    setSelectedRows(updatedSelectedRows);
+    onSelectionChange && onSelectionChange(updatedSelectedRows);
+    return;
   };
 
   return (
@@ -88,7 +95,6 @@ export const Table: FunctionComponent<TableProps> = ({
                 checkboxSelection={checkboxSelection}
                 isChecked={selectedRows.includes(rowData)}
                 onCheckboxChange={handleCheckboxChange}
-                onRowSelectionChange={handleRowSelectionChange}
               />
             ))}
           </tbody>

@@ -41,7 +41,7 @@ export interface TableRowProps {
    *
    * @type {Function}
    */
-  onCheckboxChange: (rowData: Record<string, any>) => void;
+  onCheckboxChange: (rowData: Record<string, any>, field: string) => void;
 
   /**
    * Função de retorno de chamada acionada quando a seleção de linhas na tabela muda.

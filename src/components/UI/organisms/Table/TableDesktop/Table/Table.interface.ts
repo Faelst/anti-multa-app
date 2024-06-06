@@ -20,6 +20,8 @@ export interface TableColumn {
    */
   key: string;
 
+  isCheckbox?: boolean;
+
   /**
    * Display de exibição na tabela.
    * @type {string}
@@ -63,7 +65,7 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
    * @type {(selectedRow: Record<string, any>) => void}
    * @default undefined
    */
-  onSelectedRow: (selectedRow: Record<string, any>) => void;
+  onSelectedRow?: (selectedRow: Record<string, any>) => void;
   /**
    * Uma matriz de objetos TableColumn que representa as colunas da tabela.
    *
