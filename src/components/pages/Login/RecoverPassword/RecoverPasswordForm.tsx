@@ -16,7 +16,7 @@ export const RecoverPasswordForm: FunctionComponent<RecoverPasswordProps> = ({
   const { theme } = useTheme();
   const [showPassword, setShowPassword] = useState(false);
   const isDark = theme === 'dark';
-  const color = isDark ? '#FFFFFFB2' : '';
+  const color = isDark ? '#FFFFFF' : '';
 
   const handleGoBack = () => setCurrentStep(0);
   return (

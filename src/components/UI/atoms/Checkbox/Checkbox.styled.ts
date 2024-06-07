@@ -6,7 +6,7 @@ const colorRed = '#EC0000';
 const colorDisabled = '#CCCCCC';
 export const StyledFormControlLabel = styled(FormControlLabel)(() => {
   const { theme: nextTheme } = useTheme();
-  const color = nextTheme === 'dark' ? '#FFFFFFB2' : '#111827';
+  const color = nextTheme === 'dark' ? '#FFFFFF' : '#111827';
   return {
     '& .MuiFormControlLabel-label': {
       fontSize: '16px',

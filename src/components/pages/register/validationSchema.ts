@@ -50,6 +50,7 @@ export function validationSchemaQueryForm() {
       .max(10, 'Número: Tamanho máximo excedido.')
       .typeError('Número inválido.'),
     complement: string()
+      .required('Complemento: Precisa ser preenchido.')
       .max(100, 'Complemento: Tamanho máximo excedido.')
       .typeError('Complemento inválido.')
   });

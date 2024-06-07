@@ -14,7 +14,7 @@ const SignInForm: FC<SingInFormProps> = ({ onSignup, onCloseModal }) => {
   const { theme } = useTheme();
   const [showPassword, setShowPassword] = useState(false);
   const isDark = theme === 'dark';
-  const color = isDark ? '#FFFFFFB2' : '';
+  const color = isDark ? '#FFFFFF' : '';
 
   return (
     <div className="space-y-2">

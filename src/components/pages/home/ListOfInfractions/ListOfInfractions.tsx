@@ -7,7 +7,7 @@ import { Checkbox, Table, TableColumn } from '@/components';
 import { Infraction } from '@/assets/icon';
 import { formatCurrency } from '@/utils';
 import { OpenDrawerDetails } from './ListOfInfractionsContainer';
-import { useClient } from '../../../../context/clientContext';
+import { useClient } from '@/context/clientContext';
 
 interface ListOfInfractionsProps {
   data: any[];
@@ -27,7 +27,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
   const [total] = useState(data.reduce((acc, curr) => acc + Number(curr.valorMulta), 0));
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const colorIcon = isDark ? '#FFFFFFB2' : '#00000';
+  const colorIcon = isDark ? '#FFFFFF' : '#00000';
   const columns: TableColumn[] = [
     { key: 'infra', label: 'Infração', field: 'infra', align: 'center' },
     {
@@ -95,7 +95,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
         return (
           <div className="-ml-4">
             <IconButton onClick={() => setOpenDrawer('infractionsDetails')}>
-              <AiOutlineFileSearch size={28} className="text-gray-900 md:dark:text-[#FFFFFFB2]" />
+              <AiOutlineFileSearch size={28} className="text-gray-900 md:dark:text-[#FFFFFF]" />
             </IconButton>
             <IconButton onClick={() => setOpenDrawer('resourceDetails')}>
               <Infraction height={30} width={30} color={colorIcon} />

@@ -10,7 +10,7 @@ export const SignupForm: FunctionComponent = () => {
   const { theme } = useTheme();
   const [showPassword, setShowPassword] = useState(false);
   const isDark = theme === 'dark';
-  const color = isDark ? '#FFFFFFB2' : '';
+  const color = isDark ? '#FFFFFF' : '';
 
   return (
     <Stack spacing={1}>

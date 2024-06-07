@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 const colorRed = '#E11D48';
 export const CutomFormControl = styled(FormControl)(({ theme }) => {
   const { theme: nextTheme } = useTheme();
-  const color = nextTheme === 'dark' ? '#FFFFFFB2' : '#666666';
+  const color = nextTheme === 'dark' ? '#FFFFFF' : '#666666';
 
   return {
     '& .MuiInputBase-input': {
@@ -13,7 +13,7 @@ export const CutomFormControl = styled(FormControl)(({ theme }) => {
       padding: '14px',
       height: '56px !important',
       boxSizing: 'border-box',
-      color: nextTheme === 'dark' ? '#FFFFFFB2' : '#373737',
+      color: nextTheme === 'dark' ? '#FFFFFF' : '#373737',
       '&::placeholder': {
         fontSize: '16px',
         color: '#CCCCCC',

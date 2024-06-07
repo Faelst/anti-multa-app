@@ -47,7 +47,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
                       </Typography>
                       <Typography
                         variant="sm"
-                        className="text-[#666666] md:dark:font-sans md:dark:text-[#FFFFFFB2]"
+                        className="text-[#666666] md:dark:font-sans md:dark:text-[#FFFFFF]"
                       >
                         {description}
                       </Typography>

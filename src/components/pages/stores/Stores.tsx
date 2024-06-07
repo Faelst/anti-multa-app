@@ -27,10 +27,10 @@ const StoreComponent: React.FC<StoreProps> = ({ name, logradouro, zipcode }) => 
       <Typography variant="sm" className="font-sans font-bold md:dark:text-white">
         {name}
       </Typography>
-      <Typography variant="xs" className="font-sans text-gray-500 md:dark:text-[#FFFFFFB2]">
+      <Typography variant="xs" className="font-sans text-gray-500 md:dark:text-[#FFFFFF]">
         {logradouro}
       </Typography>
-      <Typography variant="xs" className="font-sans text-gray-500 md:dark:text-[#FFFFFFB2]">
+      <Typography variant="xs" className="font-sans text-gray-500 md:dark:text-[#FFFFFF]">
         {zipcode}
       </Typography>
     </div>

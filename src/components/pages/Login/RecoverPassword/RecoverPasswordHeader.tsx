@@ -16,7 +16,7 @@ const RecoverPasswordHeader: FC<RecoverPasswordHeaderProps> = ({ currentStep }) 
       <Typography variant="h2" className="md:dark:text-white">
         Recuperar senha
       </Typography>
-      <Typography variant="sm" color="text-[#666666] md:dark:text-[#FFFFFFB2]">
+      <Typography variant="sm" color="text-[#666666] md:dark:text-[#FFFFFF]">
         {subtitle}
       </Typography>
     </div>

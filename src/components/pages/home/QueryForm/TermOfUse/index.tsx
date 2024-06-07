@@ -38,7 +38,7 @@ function TermOfUse() {
             h-10 
             text-sm 
             text-gray-700 
-            md:dark:text-[#FFFFFFB2]
+            md:dark:text-[#FFFFFF]
             border 
             border-gray-300 
             rounded-lg 
@@ -48,7 +48,7 @@ function TermOfUse() {
           }
         ]}
       />
-      <Typography variant="xs" color="text-[#666666] md:dark:text-[#FFFFFFB2]">
+      <Typography variant="xs" color="text-[#666666] md:dark:text-[#FFFFFF]">
         Ao prosseguir, você concorda com nossos{' '}
         <button className="text-red-700 hover:underline" onClick={handleOnTermOfUso}>
           termos de uso

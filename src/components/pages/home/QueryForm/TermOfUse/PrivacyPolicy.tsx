@@ -2,7 +2,7 @@ import { Typography } from '@/components/UI/atoms';
 
 export const privacyPolicyText: JSX.Element = (
   <div className="mx-5">
-    <Typography variant="xs" color="text-[#666666] md:dark:text-[#FFFFFFB2]">
+    <Typography variant="xs" color="text-[#666666] md:dark:text-[#FFFFFF]">
       <p>
         <strong>1. Coleta de Informações </strong>
         <br />

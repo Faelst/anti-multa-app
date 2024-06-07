@@ -59,7 +59,7 @@ export const ContactForm: FunctionComponent = () => {
       </Button>
 
       <div className="container my-2 max-w-md">
-        <Typography variant="xs" className="md:dark:text-[#FFFFFFB2]">
+        <Typography variant="xs" className="md:dark:text-[#FFFFFF]">
           Prometemos não utilizar suas informações de contato para enviar qualquer tipo de SPAM.
         </Typography>
       </div>

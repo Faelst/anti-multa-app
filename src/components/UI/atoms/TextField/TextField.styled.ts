@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 const colorRed = '#EC0000';
 export const CustomTextField = styled(TextField)(({ theme }) => {
   const { theme: nextTheme } = useTheme();
-  const color = nextTheme === 'dark' ? '#FFFFFFB2' : '#666666';
+  const color = nextTheme === 'dark' ? '#FFFFFF' : '#666666';
   const colorImportant = 'rgba(0, 0, 0, 0.38) !important';
 
   return {
@@ -14,17 +14,7 @@ export const CustomTextField = styled(TextField)(({ theme }) => {
       padding: '14px',
       height: '56px',
       boxSizing: 'border-box',
-      color: nextTheme === 'dark' ? '#FFFFFFB2' : '#373737',
-      // ...(nextTheme === 'dark' && {
-      //   borderRadius: '0.25rem',
-      //   border: `1px solid #FFFFFFB2`,
-      //   '&:focus, &:hover': {
-      //     border: 'none'
-      //   },
-      //   '&:not(:placeholder-shown)': {
-      //     border: 'none'
-      //   }
-      // }),
+      color: nextTheme === 'dark' ? '#FFFFFF' : '#373737',
       '&::placeholder': {
         fontSize: '14px',
         color,

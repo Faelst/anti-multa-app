@@ -2,7 +2,7 @@ import { Typography } from '@/components/UI/atoms';
 
 export const termOfUseText: JSX.Element = (
   <div className="mx-5">
-    <Typography variant="xs" color="text-[#666666] md:dark:text-[#FFFFFFB2]">
+    <Typography variant="xs" color="text-[#666666] md:dark:text-[#FFFFFF]">
       <p>
         <strong>1. Introdução</strong>
         <br />

@@ -21,10 +21,10 @@ const StoresHeader: React.FC = () => {
               <GiRotaryPhone className="text-red-600" size={23} />
               <h2 className="text-base sm:text-lg md:dark:text-white">Fale conosco:</h2>
             </div>
-            <h1 className="text-xl font-bold text-[#5C5C5C] sm:text-3xl md:dark:text-[#FFFFFFB2]">
+            <h1 className="text-xl font-bold text-[#5C5C5C] sm:text-3xl md:dark:text-[#FFFFFF]">
               0800 580 2929
             </h1>
-            <h2 className="text-lg font-medium text-[#5C5C5C] sm:text-2xl md:dark:text-[#FFFFFFB2]">
+            <h2 className="text-lg font-medium text-[#5C5C5C] sm:text-2xl md:dark:text-[#FFFFFF]">
               ou (31)2559-6200
             </h2>
           </div>

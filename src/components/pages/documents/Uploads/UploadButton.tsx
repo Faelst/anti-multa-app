@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 interface UploadProps {
   label: string;
   onUpload: (file: File) => void;
-  typeOfDocument: 'CNH' | 'Notificação';
+  typeOfDocument: 'CNH' | 'Notificação' | 'CRLV';
   hasUpload: boolean;
 }
 

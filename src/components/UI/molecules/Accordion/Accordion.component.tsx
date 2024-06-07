@@ -21,7 +21,7 @@ export const Accordion: FunctionComponent<IAccordionProps> = ({ accordion }) => 
             className="flex cursor-pointer items-center px-4 py-3 transition-all ease-in"
             onClick={() => toggleAccordion(index)}
           >
-            <h3 className="text-base text-slate-700 md:dark:text-white md:dark:hover:text-[#FFFFFFB2]">
+            <h3 className="text-base text-slate-700 md:dark:text-white md:dark:hover:text-[#FFFFFF]">
               {item.title}
             </h3>
             <span className="absolute right-0 mr-4">
@@ -37,7 +37,7 @@ export const Accordion: FunctionComponent<IAccordionProps> = ({ accordion }) => 
               activeIndex === index ? 'h-auto max-h-[1000px]' : 'h-0 max-h-0'
             }`}
           >
-            <div className="p-4 text-sm leading-normal text-[#294d7c] md:dark:text-[#FFFFFFB2]">
+            <div className="p-4 text-sm leading-normal text-[#294d7c] md:dark:text-[#FFFFFF]">
               {item.content}
             </div>
           </div>

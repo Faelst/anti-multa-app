@@ -10,6 +10,14 @@ const UploadDropzone: React.FC<UploadDropzoneProps> = ({ setSendDocument }) => {
   const { setValue, watch } = useFormContext();
   const documentCNH = watch('documentCNH') ?? [];
   const documentNotification = watch('documentNotification') ?? [];
+  const documentCRLV = watch('documentCRLV') ?? [];
+
+  const handleCRLVUpload = (file: File) => {
+    if (!file) return;
+
+    const uploadCRLV = [{ file }];
+    setValue('documentCRLV', uploadCRLV);
+  };
 
   const handleCNHUpload = (file: File) => {
     if (!file) return;
@@ -26,12 +34,12 @@ const UploadDropzone: React.FC<UploadDropzoneProps> = ({ setSendDocument }) => {
   };
 
   useEffect(() => {
-    if (documentCNH.length > 0 && documentNotification.length > 0) {
+    if (documentCNH.length > 0 && documentNotification.length > 0 && documentCRLV.length > 0) {
       setSendDocument(false);
     } else {
       setSendDocument(true);
     }
-  }, [documentCNH, documentNotification, setSendDocument]);
+  }, [documentCNH, documentNotification, documentCRLV, setSendDocument]);
 
   return (
     <>
@@ -45,6 +53,12 @@ const UploadDropzone: React.FC<UploadDropzoneProps> = ({ setSendDocument }) => {
         label="Clique aqui e faça o upload da sua Cópia da Notificação"
         onUpload={handleNotificationUpload}
         typeOfDocument="Notificação"
+        hasUpload={!!documentNotification.length}
+      />
+      <UploadButton
+        label="Clique aqui e faça o upload do seu CRLV"
+        onUpload={handleCRLVUpload}
+        typeOfDocument="CRLV"
         hasUpload={!!documentNotification.length}
       />
     </>

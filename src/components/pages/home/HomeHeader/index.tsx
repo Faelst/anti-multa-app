@@ -8,7 +8,7 @@ const HomeHeader = () => (
     <Typography variant="h2" className="font-sans md:dark:text-white">
       Consulta de Infrações
     </Typography>
-    <Typography variant="sm" color="text-[#666666] md:dark:text-[#FFFFFFB2]" className="lg:w-[90%]">
+    <Typography variant="sm" color="text-[#666666] md:dark:text-[#FFFFFF]" className="lg:w-[90%]">
       Verifique gratuitamente o status do seu veículo no Detran e regularize-o facilmente agora em
       até 12 vezes. Mantenha uma condução segura monitorando sua pontuação na CNH.
     </Typography>

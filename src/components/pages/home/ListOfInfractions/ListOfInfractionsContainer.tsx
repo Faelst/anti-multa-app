@@ -7,8 +7,8 @@ import DrawerDetails from './Drawer/DrawerDetails';
 import { useRouter } from 'next/navigation';
 import FineSummary from '../../FineSummary';
 import api from '@/service/api';
-import { useClient } from '../../../../context/clientContext';
-import { useSolicitationsContext } from '../../../../context/solicitationContext';
+import { useClient } from '@/context/clientContext';
+import { useSolicitationsContext } from '@/context/solicitationContext';
 
 export type OpenDrawerDetails = 'infractionsDetails' | 'resourceDetails';
 

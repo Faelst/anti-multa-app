@@ -3,10 +3,16 @@ import React from 'react';
 
 import { Typography } from '@/components/UI/atoms';
 import { Card, Grid } from '@mui/material';
+import { useClient } from '../../../context/clientContext';
+import { useSolicitationsContext } from '../../../context/solicitationContext';
+import { formatCurrency } from '../../../utils';
 
 interface DocumentsProps {}
 
 const DocumentsPage: React.FC<DocumentsProps> = () => {
+  const { client } = useClient();
+  const { solicitation } = useSolicitationsContext();
+
   return (
     <section className="mx-auto grid max-w-5xl grid-cols-1 ">
       <div className="col-span-1 space-y-1">
@@ -20,9 +26,9 @@ const DocumentsPage: React.FC<DocumentsProps> = () => {
           <Typography variant="sm" className=" md:dark:text-white">
             Pedido em 30 de fevereiro de 2024
           </Typography>
-          <Typography variant="md" className=" md:dark:text-white">
+          {/* <Typography variant="md" className=" md:dark:text-white">
             Número do pedido 160430543
-          </Typography>
+          </Typography> */}
         </div>
 
         <Card
@@ -37,20 +43,20 @@ const DocumentsPage: React.FC<DocumentsProps> = () => {
                 Dados do Solicitante:
               </Typography>
               <Typography variant="sm" className=" md:dark:text-white">
-                João da Silva
+                {client.name}
               </Typography>
               <Typography variant="sm" className=" md:dark:text-white">
-                CPF: 123.456.789-00
+                CPF: {client.cpf}
               </Typography>
-              {/* endereço */}
+
               <Typography variant="sm" className=" md:dark:text-white">
-                Rua das Flores, 123
-              </Typography>
-              <Typography variant="sm" className=" md:dark:text-white">
-                Bairro dos Anjos
+                {client.address.street}, {client.address.number}
               </Typography>
               <Typography variant="sm" className=" md:dark:text-white">
-                São Paulo, SP - 12345-678
+                {client.address.neighborhood}
+              </Typography>
+              <Typography variant="sm" className=" md:dark:text-white">
+                {client.address.city} - {client.address.state}
               </Typography>
               <Typography variant="sm" className=" md:dark:text-white">
                 Brasil
@@ -66,19 +72,13 @@ const DocumentsPage: React.FC<DocumentsProps> = () => {
                   alignItems: 'center'
                 }}
               >
-                <img
-                  src="https://s3-alpha-sig.figma.com/img/a05c/fd1e/5ccc033b4fb2a949e3352d4680c54acf?Expires=1717977600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=j~gX5F4-1CYAW1asSPelN-2BQroZu5dVQ-LOdntWRcJaEPnjh4yxJjqZHu4OI1Q9nk-W9F3TbkvhSY7Ly3L7hv2qTyGIkWUUFVghPFwYc1tzWVgXNedH5eQucZBzN4~Yowzcq00olJrrcXhdRdp0co-zFtNindhYNB1L55A4-gQo9Zbbku6jDrYhwrMaYHcE0LT5X9ZLNZXMpIEN3C8yYch1jgI6LRyLzkNd~XtpQouo2XrIJqjE28DJnUCcbiGJdDEkiwz19CFjYfe~pqVGyfQAEPofaaltSr0BNWFA6LiImztT4Em6fKBVblCCN7QdT0IIPocAny9IFBfcqVpXcA__"
-                  alt="visa"
-                  className="h-8 w-8"
-                  style={{ objectFit: 'contain' }}
-                />
                 <Typography variant="sm" className=" md:dark:text-white">
-                  terminando em 9305
+                  Cartão de Crédito
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Typography variant="md" className=" md:dark:text-white">
+              {/* <Typography variant="md" className=" md:dark:text-white">
                 Resumo do pedido:
               </Typography>
               <div
@@ -91,9 +91,9 @@ const DocumentsPage: React.FC<DocumentsProps> = () => {
                   Recurso Solicitado:
                 </Typography>
                 <Typography variant="md" className=" md:dark:text-white">
-                  Simples
+                  123
                 </Typography>
-              </div>
+              </div> */}
               <div
                 className="mt-1 flex justify-between"
                 style={{
@@ -104,7 +104,7 @@ const DocumentsPage: React.FC<DocumentsProps> = () => {
                   Valor Pago:
                 </Typography>
                 <Typography variant="md" className="md:dark:text-white">
-                  R$ 100,00
+                  {formatCurrency(solicitation.solicitation.amount_payment / 100)}
                 </Typography>
               </div>
             </Grid>

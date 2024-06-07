@@ -15,7 +15,7 @@ export const Breadcrumb: FunctionComponent<BreadcrumbProps> = ({ items }) => {
       aria-label="Breadcrumb"
       sx={{
         '& .MuiBreadcrumbs-separator': {
-          color: isDarkMode ? '#FFFFFFB2' : '#666666'
+          color: isDarkMode ? '#FFFFFF' : '#666666'
         }
       }}
     >
@@ -24,9 +24,7 @@ export const Breadcrumb: FunctionComponent<BreadcrumbProps> = ({ items }) => {
           key={index}
           href={item.link}
           className={`inline-flex items-center text-sm font-medium ${
-            index === items.length - 1
-              ? 'text-[#EC0000]'
-              : 'text-slate-900 md:dark:text-[#FFFFFFB2]'
+            index === items.length - 1 ? 'text-[#EC0000]' : 'text-slate-900 md:dark:text-[#FFFFFF]'
           } hover:text-[#EC0000] `}
         >
           {item.label}
