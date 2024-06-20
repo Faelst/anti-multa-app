@@ -57,20 +57,53 @@ const QueryForm = () => {
             backgroundColor: 'transparent'
           }}
         >
-          <TextFormField
-            name="name"
-            label="Nome do solicitante"
-            placeholder="Ex: João da Silva"
-            required
-            InputProps={{
-              inputProps: { maxLength: 100 }
-            }}
-            onChange={({ target }) => {
-              const value = target?.value ?? '';
-              setValue('name', value);
-            }}
-          />
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={12}>
+              <TextFormField
+                name="name"
+                label="Nome do solicitante"
+                placeholder="Ex: João da Silva"
+                required
+                InputProps={{
+                  inputProps: { maxLength: 100 }
+                }}
+                onChange={({ target }) => {
+                  const value = target?.value ?? '';
+                  setValue('name', value);
+                }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={6}>
+              <TextFormField
+                name="email"
+                label="E-mail"
+                placeholder="Ex: maria@email.com"
+                required
+                InputProps={{ inputProps: { maxLength: 50 } }}
+                onChange={({ target }) => {
+                  const value = target?.value ?? '';
+                  setValue('email', value);
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextFormField
+                name="civilState"
+                label="Estado Civil"
+                placeholder="Ex: Solteiro"
+                required
+                InputProps={{ inputProps: { maxLength: 50 } }}
+                onChange={({ target }) => {
+                  const value = target?.value ?? '';
+                  setValue('civilState', value);
+                }}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <TextFormField
                 name="cpf"
@@ -87,7 +120,7 @@ const QueryForm = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextFormField
                 name="rg"
                 label="RG"
@@ -103,18 +136,97 @@ const QueryForm = () => {
                 }}
               />
             </Grid>
+            <Grid item xs={12} sm={2}>
+              <TextFormField
+                name="expeditorRg"
+                label="Órgão expedidor"
+                placeholder="Ex: SSP"
+                required
+                InputProps={{ inputProps: { maxLength: 10 } }}
+                onChange={({ target }) => {
+                  const value = target?.value ?? '';
+                  setValue('expeditorRg', value);
+                }}
+              />
+            </Grid>
           </Grid>
-          <TextFormField
-            name="profession"
-            label="Profissão"
-            placeholder="Ex: Advogado"
-            required
-            InputProps={{ inputProps: { maxLength: 50 } }}
-            onChange={({ target }) => {
-              const value = target?.value ?? '';
-              setValue('profession', value);
-            }}
-          />
+
+          <Grid spacing={1}>
+            <TextFormField
+              name="occupation"
+              label="Profissão"
+              placeholder="Ex: Advogado"
+              required
+              InputProps={{ inputProps: { maxLength: 50 } }}
+              onChange={({ target }) => {
+                const value = target?.value ?? '';
+                setValue('occupation', value);
+              }}
+            />
+          </Grid>
+        </Card>
+      </div>
+
+      <div className="mt-8 space-y-4">
+        <Typography variant="xl" className="font-extrabold italic md:dark:text-white">
+          Dados da Solicitação
+        </Typography>
+
+        <Card
+          className="space-y-3 border border-gray-400 bg-transparent p-6"
+          style={{
+            backgroundColor: 'transparent'
+          }}
+        >
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={12}>
+              <TextFormField
+                name="vehicleOwner"
+                label="Proprietário do veículo"
+                placeholder="Ex: João da Silva"
+                required
+                InputProps={{
+                  inputProps: { maxLength: 100 }
+                }}
+                onChange={({ target }) => {
+                  const value = target?.value ?? '';
+                  setValue('vehicleOwner', value);
+                }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={5}>
+              <TextFormField
+                name="cnhNumber"
+                label="Número da CNH"
+                placeholder="Ex: 12345678900"
+                required
+                InputProps={{
+                  inputProps: { maxLength: 11 }
+                }}
+                onChange={({ target }) => {
+                  const value = target?.value ?? '';
+                  setValue('cnhNumber', value);
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={2}>
+              <TextFormField
+                name="cnhUf"
+                label="UF"
+                placeholder="Ex: SP"
+                required
+                shrink
+                InputProps={{ inputProps: { maxLength: 2 } }}
+                onChange={({ target }) => {
+                  const value = target?.value ?? '';
+                  setValue('cnhUf', value);
+                }}
+              />
+            </Grid>
+          </Grid>
         </Card>
       </div>
 

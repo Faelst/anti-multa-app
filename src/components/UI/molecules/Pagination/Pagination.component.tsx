@@ -40,15 +40,6 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   return (
     <div className="flex items-center space-x-2">
       <div className="flex items-center">
-        <div className="flex items-center">
-          <span className="mr-3 text-xs text-gray-600 md:dark:text-white">
-            Linhas por página:
-            <span className="ml-0.5 p-0.5 text-gray-800 md:dark:text-white">
-              {renderItemsPerPageOptions()}
-            </span>
-          </span>
-        </div>
-
         <button
           onClick={() => handlePageChange(1)}
           disabled={currentPage === 1}

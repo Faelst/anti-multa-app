@@ -21,7 +21,7 @@ export default function RequiredDocument() {
         </div>
         <div className="flex items-center space-x-2">
           <div className="h-4 w-4 rounded-full bg-green-500"></div>
-          <p className="text-gray-600 dark:text-gray-400">Copia da Notificação</p>
+          <p className="text-gray-600 dark:text-gray-400">Multa</p>
         </div>
         <div className="flex items-center space-x-2">
           <div className="h-4 w-4 rounded-full bg-green-500"></div>

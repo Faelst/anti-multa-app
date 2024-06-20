@@ -130,6 +130,7 @@ export const FormProvider = ({
   };
 
   const htmlSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log(errors);
     event.preventDefault();
     event.stopPropagation();
     handleSubmit(formSubmit, onError);

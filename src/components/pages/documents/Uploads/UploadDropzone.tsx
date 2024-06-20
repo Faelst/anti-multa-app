@@ -52,14 +52,14 @@ const UploadDropzone: React.FC<UploadDropzoneProps> = ({ setSendDocument }) => {
       <UploadButton
         label="Clique aqui e faça o upload da sua Cópia da Notificação"
         onUpload={handleNotificationUpload}
-        typeOfDocument="Notificação"
+        typeOfDocument="Multa"
         hasUpload={!!documentNotification.length}
       />
       <UploadButton
         label="Clique aqui e faça o upload do seu CRLV"
         onUpload={handleCRLVUpload}
         typeOfDocument="CRLV"
-        hasUpload={!!documentNotification.length}
+        hasUpload={!!documentCRLV.length}
       />
     </>
   );

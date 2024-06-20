@@ -7,6 +7,30 @@ export function validationSchemaQueryForm() {
       .required('Nome: Precisa ser preenchido.')
       .max(100, 'Nome: Tamanho máximo excedido.')
       .typeError('Nome inválido.'),
+    email: string()
+      .required('Email: Precisa ser preenchido.')
+      .email('Email inválido.')
+      .max(100, 'Email: Tamanho máximo excedido.'),
+    expeditorRg: string()
+      .required('Órgão expedidor: Precisa ser preenchido.')
+      .max(10, 'Órgão expedidor: Tamanho máximo excedido.')
+      .typeError('Órgão expedidor inválido.'),
+    occupation: string()
+      .required('Profissão: Precisa ser preenchido.')
+      .max(50, 'Profissão: Tamanho máximo excedido.')
+      .typeError('Profissão inválida.'),
+    cnhNumber: string()
+      .required('CNH: Precisa ser preenchido.')
+      .max(20, 'CNH: Tamanho máximo excedido.')
+      .typeError('CNH inválido.'),
+    cnhUf: string()
+      .required('CNH UF: Precisa ser preenchido.')
+      .max(2, 'CNH UF: Tamanho máximo excedido.')
+      .typeError('CNH UF inválido.'),
+    civilState: string()
+      .required('Estado civil: Precisa ser preenchido.')
+      .max(50, 'Estado civil: Tamanho máximo excedido.')
+      .typeError('Estado civil inválido.'),
     cpf: string()
       .required('CPF: Precisa ser preenchido.')
       .typeError('CPF inválido.')
@@ -20,10 +44,10 @@ export function validationSchemaQueryForm() {
       .required('RG: Precisa ser preenchido.')
       .typeError('RG inválido.')
       .max(12, 'RG: Tamanho máximo excedido.'),
-    profession: string()
-      .required('Profissão: Precisa ser preenchido.')
-      .max(50, 'Profissão: Tamanho máximo excedido.')
-      .typeError('Profissão inválida.'),
+    vehicleOwner: string()
+      .required('Proprietário do veículo: Precisa ser preenchido.')
+      .max(100, 'Proprietário do veículo: Tamanho máximo excedido.')
+      .typeError('Proprietário do veículo inválido.'),
     cep: string()
       .required('CEP: Precisa ser preenchido.')
       .typeError('CEP inválido.')
@@ -71,5 +95,11 @@ export const defaultValuesQueryForm = {
   neighborhood: null,
   street: null,
   number: null,
-  complement: null
+  complement: null,
+  email: null,
+  expeditorRg: null,
+  occupation: null,
+  vehicleOwner: null,
+  civilState: null,
+  cnhUf: null
 };

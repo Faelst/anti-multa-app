@@ -10,6 +10,13 @@ interface ClientContextType {
     chassi: string;
     vehiclePlate: string;
     provisionalLicense: boolean;
+    rg: string;
+    email: string;
+    expeditorRg: string;
+    occupation: string;
+    cnhNumber: string;
+    cnhUf: string;
+    civilState: string;
     address: {
       street: string;
       number: string;
@@ -31,6 +38,13 @@ const ClientContext = createContext<ClientContextType>({
     phone: '',
     chassi: '',
     vehiclePlate: '',
+    rg: '',
+    email: '',
+    expeditorRg: '',
+    occupation: '',
+    cnhNumber: '',
+    cnhUf: '',
+    civilState: '',
     address: {
       street: '',
       number: '',
@@ -59,6 +73,13 @@ export const ClientProvider = ({ children }: InfractionsProviderProps) => {
     phone: '',
     chassi: '',
     vehiclePlate: '',
+    rg: '',
+    email: '',
+    expeditorRg: '',
+    occupation: '',
+    cnhNumber: '',
+    cnhUf: '',
+    civilState: '',
     address: {
       street: '',
       number: '',

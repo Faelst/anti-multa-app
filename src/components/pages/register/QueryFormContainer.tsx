@@ -8,13 +8,26 @@ import {
 import QueryForm from './QueryForm';
 import { useClient } from '@/context/clientContext';
 import api from '@/service/api';
+import { useSolicitationsContext } from '../../../context/solicitationContext';
 
 const QueryFormContainer = () => {
   const route = useRouter();
   const { client, setClient } = useClient();
+  const { solicitation, setSolicitations } = useSolicitationsContext();
 
   const handleSubmit = async (data: QueryFormProps) => {
     try {
+      console.log(solicitation);
+      await api.updateCustomer(client.id, {
+        rg: data.rg,
+        email: data.email,
+        expeditorRg: data.expeditorRg,
+        occupation: data.occupation,
+        cnhNumber: data.cnhNumber,
+        cnhUf: data.cnhUf,
+        civilState: data.civilState
+      });
+
       await api.addAddress({
         street: data.street,
         number: data.number,
@@ -26,8 +39,24 @@ const QueryFormContainer = () => {
         customerId: client.id
       });
 
+      await api.updateSolicitation(solicitation.solicitation.id, {
+        vehicleOwner: data.vehicleOwner
+      });
+
+      setSolicitations((prev: any) => ({
+        ...prev,
+        vehicleOwner: data.vehicleOwner
+      }));
+
       setClient((prev: any) => ({
         ...prev,
+        rg: data.rg,
+        email: data.email,
+        expeditorRg: data.expeditorRg,
+        occupation: data.occupation,
+        cnhNumber: data.cnhNumber,
+        cnhUf: data.cnhUf,
+        civilState: data.civilState,
         address: {
           street: data.street,
           number: data.number,
