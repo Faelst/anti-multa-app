@@ -35,10 +35,15 @@ const PaymentFormContainer: FunctionComponent = () => {
 
       if (![200, 201].includes(payment.status)) {
         toast.error('Ocorreu um erro ao processar o pagamento. Tente novamente mais tarde.');
+
         return;
       }
 
-      route.push('/infracoes/pagamento/detalhes');
+      toast.success('Pagamento realizado com sucesso!');
+
+      setTimeout(() => {
+        route.push('/infracoes/pagamento/detalhes');
+      }, 2000);
     } catch (error) {
       console.log(error);
       toast.success('Ocorreu um erro ao processar o pagamento. Tente novamente mais tarde.');
