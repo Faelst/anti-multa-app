@@ -57,7 +57,11 @@ export const TableRow: FunctionComponent<TableRowProps> = ({
           >
             {column.action ? (
               column.isCheckbox ? (
-                <>
+                <div
+                  className={`flex items-center ${
+                    column.field === 'recursoSimples' ? 'justify-end' : 'justify-start'
+                  }}`}
+                >
                   <Checkbox
                     onChange={() => handleCheckboxChange(column.field)}
                     checked={
@@ -67,7 +71,7 @@ export const TableRow: FunctionComponent<TableRowProps> = ({
                     }
                   />
                   <p className="flex max-h-1 items-center">{column.action(rowData)}</p>
-                </>
+                </div>
               ) : (
                 <p className="flex max-h-1 items-center">{column.action(rowData)}</p>
               )

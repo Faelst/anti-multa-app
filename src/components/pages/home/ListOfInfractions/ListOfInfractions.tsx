@@ -64,12 +64,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       align: 'center',
       isCheckbox: true,
       action: (rowData: any) => {
-        const formattedCurrency = formatCurrency(Number(rowData.recursoSimples));
-        return (
-          <div className="flex items-center">
-            <span>{formattedCurrency}</span>
-          </div>
-        );
+        return formatCurrency(Number(rowData.recursoSimples));
       }
     },
     {
@@ -79,12 +74,7 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       align: 'center',
       isCheckbox: true,
       action: (rowData: any) => {
-        const formattedCurrency = formatCurrency(Number(rowData.recursoEspecial));
-        return (
-          <div className="flex items-center">
-            <span>{formattedCurrency}</span>
-          </div>
-        );
+        return formatCurrency(Number(rowData.recursoEspecial));
       }
     },
     {
@@ -94,9 +84,6 @@ const ListOfInfractions: React.FC<ListOfInfractionsProps> = ({
       action: () => {
         return (
           <div className="-ml-4">
-            <IconButton onClick={() => setOpenDrawer('infractionsDetails')}>
-              <AiOutlineFileSearch size={28} className="text-gray-900 md:dark:text-[#FFFFFF]" />
-            </IconButton>
             <IconButton onClick={() => setOpenDrawer('resourceDetails')}>
               <Infraction height={30} width={30} color={colorIcon} />
             </IconButton>

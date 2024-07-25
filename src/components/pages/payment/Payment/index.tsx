@@ -10,6 +10,7 @@ import { FieldValues } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import api from '@/service/api';
 import { useSolicitationsContext } from '../../../../context/solicitationContext';
+import { toast } from 'sonner';
 
 const PaymentFormContainer: FunctionComponent = () => {
   const route = useRouter();
@@ -32,9 +33,15 @@ const PaymentFormContainer: FunctionComponent = () => {
         solicitationId: solicitation.id
       });
 
+      if (![200, 201].includes(payment.status)) {
+        toast.error('Ocorreu um erro ao processar o pagamento. Tente novamente mais tarde.');
+        return;
+      }
+
       route.push('/infracoes/pagamento/detalhes');
     } catch (error) {
       console.log(error);
+      toast.success('Ocorreu um erro ao processar o pagamento. Tente novamente mais tarde.');
     }
   };
 
