@@ -33,7 +33,8 @@ export function validationSchemaQueryForm() {
         return isValidCPF(value);
       })
       .max(14, 'CPF: Tamanho máximo excedido.'),
-    provisionalLicense: boolean()
+    provisionalLicense: boolean(),
+    indicator: string()
   });
 }
 
@@ -46,5 +47,6 @@ export const defaultValuesQueryForm = {
   name: null,
   phone: null,
   cpf: null,
-  provisionalLicense: false
+  provisionalLicense: false,
+  indicator: null
 };

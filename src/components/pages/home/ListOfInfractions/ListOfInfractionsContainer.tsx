@@ -44,7 +44,8 @@ const ListOfInfractionsContainer = () => {
         defenseDate: infraction.defenseDate,
         situation: infraction.situation,
         code: infraction.code,
-        location: infraction.location
+        location: infraction.location,
+        indicator: client.indicator
       }))
     });
 

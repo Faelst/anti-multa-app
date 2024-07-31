@@ -23,6 +23,16 @@ const DocumentsPage: React.FC<DocumentsProps> = () => {
 
       <div className="mt-5 space-y-8 p-5 md:dark:border-none md:dark:bg-[#15141b] md:dark:shadow-xl">
         <div className="flex justify-between">
+          <Typography variant="sm" className="font-extrabold md:dark:text-white">
+            Recebemos sua solicitação e nosso time já vai começar a trabalhar nisso! Caso queira
+            acompanhar seu pedido entre em contato no whatsapp (99)99999-9999 e informe seus dados!
+          </Typography>
+          {/* <Typography variant="md" className=" md:dark:text-white">
+            Número do pedido 160430543
+          </Typography> */}
+        </div>
+
+        <div className="flex justify-between">
           <Typography variant="sm" className=" md:dark:text-white">
             Pedido em 30 de fevereiro de 2024
           </Typography>
@@ -76,7 +86,22 @@ const DocumentsPage: React.FC<DocumentsProps> = () => {
                   Cartão de Crédito
                 </Typography>
               </div>
+
+              <Typography variant="md" className="mt-5 md:dark:text-white">
+                Status do Pagamento:
+              </Typography>
+              <div
+                className="mt-1 flex justify-start space-x-4"
+                style={{
+                  alignItems: 'center'
+                }}
+              >
+                <Typography variant="sm" className=" md:dark:text-white">
+                  Pagamento Aprovado
+                </Typography>
+              </div>
             </Grid>
+
             <Grid item xs={12} sm={4}>
               {/* <Typography variant="md" className=" md:dark:text-white">
                 Resumo do pedido:

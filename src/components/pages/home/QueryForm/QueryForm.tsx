@@ -71,6 +71,7 @@ const QueryForm = () => {
         }}
       />
       <TextFormField name="chassi" label="Chassi" placeholder="Ex: 9B1234567C8901234" required />
+      <TextFormField name="indicator" label="Indicador" placeholder="Indicação (opcional)" />
       <FormControlLabel
         name="provisionalLicense"
         control={<Checkbox color="error" />}

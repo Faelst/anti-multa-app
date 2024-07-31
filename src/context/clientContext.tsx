@@ -26,6 +26,7 @@ interface ClientContextType {
       zipCode: string;
       complement: string;
     };
+    indicator: string;
   };
   setClient: (data: any) => void;
 }
@@ -54,7 +55,8 @@ const ClientContext = createContext<ClientContextType>({
       zipCode: '',
       complement: ''
     },
-    provisionalLicense: false
+    provisionalLicense: false,
+    indicator: ''
   },
   setClient: () => {}
 });
@@ -89,7 +91,8 @@ export const ClientProvider = ({ children }: InfractionsProviderProps) => {
       zipCode: '',
       complement: ''
     },
-    provisionalLicense: false
+    provisionalLicense: false,
+    indicator: ''
   });
 
   return <ClientContext.Provider value={{ client, setClient }}>{children}</ClientContext.Provider>;

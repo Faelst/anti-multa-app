@@ -26,7 +26,8 @@ const QueryFormContainer = () => {
     cpf,
     name,
     phone,
-    provisionalLicense
+    provisionalLicense,
+    indicator
   }: QueryFormProps) => {
     try {
       const customer = await api.registerClient({
@@ -42,7 +43,8 @@ const QueryFormContainer = () => {
         phone,
         chassi,
         vehiclePlate,
-        provisionalLicense
+        provisionalLicense,
+        indicator
       });
 
       const { data } = await api.fetchTrafficInfractions({

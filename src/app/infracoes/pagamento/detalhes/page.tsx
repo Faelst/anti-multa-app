@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useClient } from '@/context/clientContext';
-import { useSolicitationsContext } from '@/context/solicitationContext';
 
 const DynamicDocumentsPage = dynamic(() => import('@/components/pages/details'), {
   loading: () => <LoadingSpinner />
