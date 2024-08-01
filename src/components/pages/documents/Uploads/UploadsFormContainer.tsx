@@ -9,19 +9,30 @@ import { Grid } from '@mui/material';
 import { UploadIcon } from '@/components/UI/Icons';
 import { extractAndConvertFiles } from '@/utils';
 import { useRouter } from 'next/navigation';
+import api from '../../../../service/api';
+import { useSolicitationsContext } from '../../../../context/solicitationContext';
 
 interface UploadsFormData {}
 
 const UploadsFormContainer: React.FC<UploadsFormData> = () => {
   const route = useRouter();
+  const { solicitation } = useSolicitationsContext();
   const [sendDocument, setSendDocument] = React.useState(true);
 
   const handleOnSubmit = async (value: UploadsProps) => {
-    const base64Files = await extractAndConvertFiles(value);
-    console.log('onsubmit', value);
-    debugger;
+    const formData = new FormData();
 
-    route.push('/infracoes/pagamento/check-out');
+    formData.append('documentNotification', value.documentNotification[0].file as File);
+    formData.append('documentCNH', value.documentCNH[0].file as File);
+    formData.append('documentCRLV', value.documentCRLV[0].file as File);
+
+    try {
+      await api.uploadDocuments(solicitation.solicitation.id, formData);
+
+      route.push('/infracoes/pagamento/check-out');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const validationSchema = validationSchemaDocForm();

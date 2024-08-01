@@ -29,7 +29,12 @@ const ListOfInfractionsContainer = () => {
   const handleNextClick = async () => {
     const solicitations = await api.createSolicitation({
       customerId: client.id,
+      indicator: client.indicator,
       infractions: infractionsList.map((infraction) => ({
+        processamento: infraction.processamento,
+        orgao: infraction.orgao,
+        ait: infraction.ia,
+        recurseType: infraction.recurseType,
         simpleAmount: infraction.recursoSimples,
         especialAmount: infraction.recursoEspecial,
         inflationAmount: infraction.valorMulta,
@@ -44,8 +49,7 @@ const ListOfInfractionsContainer = () => {
         defenseDate: infraction.defenseDate,
         situation: infraction.situation,
         code: infraction.code,
-        location: infraction.location,
-        indicator: client.indicator
+        location: infraction.location
       }))
     });
 

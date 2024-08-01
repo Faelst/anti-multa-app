@@ -24,15 +24,18 @@ export function validationSchemaDocForm() {
   return object().shape({
     documentNotification: array().of(createFieldSchema()),
     documentCNH: array().of(createFieldSchema()),
-    observation: string().nullable()
+    observation: string().nullable(),
+    documentCRLV: array().of(createFieldSchema())
   });
 }
 
 const inferedSchema = validationSchemaDocForm();
+
 export type UploadsProps = InferType<typeof inferedSchema>;
 
 export const defaultValuesDocForm = {
   documentNotification: [],
   documentCNH: [],
+  documentCRLV: [],
   observation: null
 };

@@ -17,6 +17,12 @@ export const serializeToListInfractions = (data: any) => {
         recursoSimples: infractions?.rec_simples || 0,
         recursoEspecial: infractions?.rec_especial || 0,
         dataDaInfracao: `${multa.data} ${multa.hora}`,
+        ia: multa.ait,
+        processamento: multa.processamento,
+        placa: multa.placa,
+        orgao: multa.orgao,
+        tipo: multa.tipo,
+        normalizado_valor: multa.normalizado_valor,
         type: 'multa',
         descricao: multa.descricao,
         date: multa.data,
@@ -81,6 +87,11 @@ export function extractAndConvertFiles(data: UploadsProps) {
   });
 
   data?.documentCNH!?.forEach((item) => {
+    const file = item.file as File;
+    allFiles.push(file);
+  });
+
+  data?.documentCRLV!?.forEach((item) => {
     const file = item.file as File;
     allFiles.push(file);
   });

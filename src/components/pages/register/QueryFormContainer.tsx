@@ -17,7 +17,6 @@ const QueryFormContainer = () => {
 
   const handleSubmit = async (data: QueryFormProps) => {
     try {
-      console.log(solicitation);
       await api.updateCustomer(client.id, {
         rg: data.rg,
         email: data.email,

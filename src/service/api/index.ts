@@ -65,6 +65,16 @@ const api = {
     return api.get('/traffic-inflations', {
       params: { vehiclePlate, chassi }
     });
+  },
+
+  uploadDocuments: async (solicitationId: string, data: any): Promise<AxiosResponse> => {
+    const api = await getAxiosInstance();
+
+    return api.post(`/solicitation/upload-documents/${solicitationId}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   }
 };
 
